@@ -1,8 +1,8 @@
 %define name	parted
-%define	version	1.8.2
-%define release %mkrel 3
+%define	version	1.8.6
+%define release %mkrel 1
 %define major   1.8
-%define major_  2
+%define major_  6
 %define libname %mklibname %{name}%{major}_ %{major_}
 
 Summary:	Flexible partitioning tool
@@ -16,10 +16,14 @@ BuildRequires: 	automake1.8
 URL:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.bz2
 
-Patch100:	parted-1.7.0-disksunraid.patch
+Patch100:	parted-1.8.6-disksunraid.patch
+# libreadline.so should refer libncurses.so since it needs it,
+# but we don't want this for bootstrapping issue (?)
+# so removing as-needed when detecting libreadline.so otherwise it fails
+Patch101:	parted-1.8.6-fix-readline-detection-in-configure.patch
 
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	e2fsprogs-devel readline-devel device-mapper-devel gettext-devel
+BuildRequires:	e2fsprogs-devel readline-devel device-mapper-devel gettext-devel libreadline-devel
 
 %package -n	%{libname}
 Summary:	Files required to compile software that uses libparted
@@ -31,10 +35,11 @@ Obsoletes: %{mklibname %name 1.7} = %version
 Summary:	Files required to compile software that uses libparted
 Group:		Development/C
 Requires:	e2fsprogs %{libname} = %{version}
-Provides:       libparted-devel parted-devel
+Provides:       libparted-devel libparted%{major}-devel parted-devel
 Obsoletes:      parted-devel
 Conflicts:     	libparted1.7_1-devel
 Conflicts:     	libparted1.8_1-devel
+Conflicts:     	libparted1.8_2-devel
 
 %description
 GNU Parted is a program that allows you to create, destroy,
@@ -53,8 +58,10 @@ link software with libparted.
 %setup -q
 
 %patch100 -p1 -b .disksunraid
+%patch101 -p1
 
 %build
+autoconf
 %configure2_5x --disable-Werror --enable-device-mapper
 
 %make
@@ -62,6 +69,9 @@ link software with libparted.
 %install
 rm -rf $RPM_BUILD_ROOT
 %{makeinstall_std}
+
+rm $RPM_BUILD_ROOT/usr/bin/label
+
 %find_lang %{name}
 
 %clean
@@ -96,6 +106,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so
 %{_libdir}/*.la
 %{_includedir}/*
-%{_datadir}/aclocal/parted.m4
-
-
+%{_libdir}/pkgconfig/libparted.pc
