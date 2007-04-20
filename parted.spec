@@ -70,7 +70,8 @@ autoconf
 rm -rf $RPM_BUILD_ROOT
 %{makeinstall_std}
 
-rm $RPM_BUILD_ROOT/usr/bin/label
+# test program, it should not be installed, but it happens, i don't know why
+rm -f $RPM_BUILD_ROOT/usr/bin/label
 
 %find_lang %{name}
 
