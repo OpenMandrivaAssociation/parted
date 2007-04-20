@@ -33,6 +33,8 @@ Group:		Development/C
 Requires:	e2fsprogs %{libname} = %{version}
 Provides:       libparted-devel parted-devel
 Obsoletes:      parted-devel
+Conflicts:     	libparted1.7_1-devel
+Conflicts:     	libparted1.8_1-devel
 
 %description
 GNU Parted is a program that allows you to create, destroy,
