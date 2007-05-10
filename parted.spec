@@ -1,29 +1,29 @@
-%define name	parted
-%define	version	1.8.6
-%define release %mkrel 1
 %define major   1.8
-%define major_  6
+%define major_  7
 %define libname %mklibname %{name}%{major}_ %{major_}
 
+Name:		parted
+Version:	1.8.7
+Release:	%mkrel 1
 Summary:	Flexible partitioning tool
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
 License:	GPL
 Group:		System/Configuration/Hardware
 BuildRequires:	gpm-devel ncurses-devel e2fsprogs-devel
 BuildRequires: 	automake1.8
 URL:		http://www.gnu.org/software/parted/
-Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.bz2
-
+Source0:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.bz2
+Source1:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.bz2.sha1
+Source2:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.bz2.sha1.sig
+Source3:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.bz2.sig
 Patch100:	parted-1.8.6-disksunraid.patch
 # libreadline.so should refer libncurses.so since it needs it,
 # but we don't want this for bootstrapping issue (?)
 # so removing as-needed when detecting libreadline.so otherwise it fails
 Patch101:	parted-1.8.6-fix-readline-detection-in-configure.patch
-
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Requires(post): info-install
+Requires(preun): info-install
 BuildRequires:	e2fsprogs-devel readline-devel device-mapper-devel gettext-devel libreadline-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %package -n	%{libname}
 Summary:	Files required to compile software that uses libparted
@@ -56,7 +56,6 @@ link software with libparted.
 
 %prep
 %setup -q
-
 %patch100 -p1 -b .disksunraid
 %patch101 -p1
 
@@ -67,16 +66,16 @@ autoconf
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%{makeinstall_std}
+rm -rf %{buildroot}
+%{makeinstall}
 
 # test program, it should not be installed, but it happens, i don't know why
-rm -f $RPM_BUILD_ROOT/usr/bin/label
+rm -f %{buildroot}/usr/bin/label
 
 %find_lang %{name}
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 %_install_info %{name}
@@ -85,8 +84,8 @@ rm -rf $RPM_BUILD_ROOT
 %_remove_install_info %{name}
 
 %post   -n %{libname} -p /sbin/ldconfig
-%postun -n %{libname} -p /sbin/ldconfig
 
+%postun -n %{libname} -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(-,root,root,755)
