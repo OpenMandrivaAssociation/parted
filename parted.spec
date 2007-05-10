@@ -75,9 +75,6 @@ link software with libparted.
 %{__rm} -rf %{buildroot}
 %{makeinstall}
 
-# test program, it should not be installed, but it happens, i don't know why
-%{__rm} %{buildroot}/usr/bin/label
-
 %find_lang %{name}
 
 %clean
