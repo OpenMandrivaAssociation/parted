@@ -4,7 +4,7 @@
 
 Name:           parted
 Version:        1.8.7
-Release:        %mkrel 1
+Release:        %mkrel 2
 Summary:        Flexible partitioning tool
 License:        GPL
 Group:          System/Configuration/Hardware
@@ -73,7 +73,7 @@ link software with libparted.
 
 %install
 %{__rm} -rf %{buildroot}
-%{makeinstall}
+%{makeinstall_std}
 
 %find_lang %{name}
 
@@ -91,19 +91,19 @@ link software with libparted.
 %postun -n %{libname} -p /sbin/ldconfig
 
 %files -f %{name}.lang
-%defattr(0644,root,root,0755)
+%defattr(-,root,root,0755)
 %doc README
-%attr(0755,root,root) %{_sbindir}/*
+%{_sbindir}/*
 %{_mandir}/man*/*
 %{_infodir}/parted.info*
 
 %files -n %{libname}
-%defattr(0644,root,root,0755)
+%defattr(-,root,root,0755)
 %doc TODO
-%attr(0755,root,root) %{_libdir}/lib%{name}-%{major}.so.%{major_}*
+%{_libdir}/lib%{name}-%{major}.so.%{major_}*
 
 %files -n %{libname}-devel
-%defattr(0644,root,root,0755)
+%defattr(-,root,root,0755)
 %doc AUTHORS ChangeLog doc/API
 %{_libdir}/*.a
 %{_libdir}/*.so
