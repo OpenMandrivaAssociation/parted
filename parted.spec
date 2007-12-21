@@ -26,6 +26,7 @@ BuildRequires:  libe2fsprogs-devel
 BuildRequires:  libgpm-devel
 BuildRequires:  libncurses-devel
 BuildRequires:  libreadline-devel
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %package -n %{libname}
 Summary:        Files required to compile software that uses libparted
