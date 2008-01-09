@@ -3,10 +3,10 @@
 %define libname %mklibname %{name}%{major}_ %{major_}
 
 Name:           parted
-Version:        1.8.7
-Release:        %mkrel 2
+Version:        1.8.8
+Release:        %mkrel 1
 Summary:        Flexible partitioning tool
-License:        GPL
+License:        GPLv3+
 Group:          System/Configuration/Hardware
 URL:            http://www.gnu.org/software/parted/
 Source0:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.bz2
@@ -17,7 +17,7 @@ Patch0:         parted-1.8.6-disksunraid.patch
 # libreadline.so should refer libncurses.so since it needs it,
 # but we don't want this for bootstrapping issue (?)
 # so removing as-needed when detecting libreadline.so otherwise it fails
-Patch1:         parted-1.8.6-fix-readline-detection-in-configure.patch
+Patch1:         parted-1.8.8-fix-readline-detection-in-configure.patch
 Requires(post): info-install
 Requires(preun):info-install
 BuildRequires:  device-mapper-devel
@@ -64,16 +64,17 @@ link software with libparted.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
+%patch1 -p0
 
 %build
-%{_bindir}/autoconf
-%{configure2_5x} --disable-Werror --enable-device-mapper
-%{make}
+aclocal
+autoconf
+%configure2_5x --disable-Werror --enable-device-mapper
+%make
 
 %install
 %{__rm} -rf %{buildroot}
-%{makeinstall_std}
+%makeinstall_std
 
 %find_lang %{name}
 
