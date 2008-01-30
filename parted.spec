@@ -1,5 +1,5 @@
 %define major   1.8
-%define major_  7
+%define major_  8
 %define libname %mklibname %{name}%{major}_ %{major_}
 
 Name:           parted
@@ -47,6 +47,7 @@ Obsoletes:      parted-devel < %{version}
 Conflicts:      libparted1.7_1-devel
 Conflicts:      libparted1.8_1-devel
 Conflicts:      libparted1.8_2-devel
+Conflicts:      libparted1.8_7-devel
 
 %description
 GNU Parted is a program that allows you to create, destroy,
@@ -67,9 +68,9 @@ link software with libparted.
 %patch1 -p0
 
 %build
-aclocal
-autoconf
-%configure2_5x --disable-Werror --enable-device-mapper
+#aclocal
+#autoconf
+%configure2_5x --disable-Werror --enable-device-mapper --without-readline
 %make
 
 %install
@@ -94,6 +95,7 @@ autoconf
 %files -f %{name}.lang
 %defattr(-,root,root,0755)
 %doc README
+%{_bindir}/label
 %{_sbindir}/*
 %{_mandir}/man*/*
 %{_infodir}/parted.info*
