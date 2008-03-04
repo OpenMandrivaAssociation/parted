@@ -4,7 +4,7 @@
 
 Name:           parted
 Version:        1.8.8
-Release:        %mkrel 1
+Release:        %mkrel 2
 Summary:        Flexible partitioning tool
 License:        GPLv3+
 Group:          System/Configuration/Hardware
