@@ -95,7 +95,6 @@ link software with libparted.
 %files -f %{name}.lang
 %defattr(-,root,root,0755)
 %doc README
-%{_bindir}/label
 %{_sbindir}/*
 %{_mandir}/man*/*
 %{_infodir}/parted.info*
