@@ -71,14 +71,14 @@ link software with libparted.
 %patch2 -p0
 
 %build
-#aclocal
-#autoconf
 %configure2_5x --disable-Werror --enable-device-mapper
 %make
 
 %install
 %{__rm} -rf %{buildroot}
 %makeinstall_std
+
+%{__rm} %{buildroot}%{_bindir}/label
 
 %find_lang %{name}
 
@@ -102,6 +102,7 @@ link software with libparted.
 %files -f %{name}.lang
 %defattr(-,root,root,0755)
 %doc README
+%{_sbindir}/*
 %{_sbindir}/*
 %{_mandir}/man*/*
 %{_infodir}/parted.info*
