@@ -78,8 +78,6 @@ link software with libparted.
 %{__rm} -rf %{buildroot}
 %makeinstall_std
 
-%{__rm} %{buildroot}%{_bindir}/label
-
 %find_lang %{name}
 
 %clean
