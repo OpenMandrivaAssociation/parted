@@ -1,6 +1,7 @@
 %define major   1.8
 %define major_  8
 %define libname %mklibname %{name}%{major}_ %{major_}
+%define develname %mklibname %{name} -d
 
 Name:           parted
 Version:        1.8.8
@@ -18,6 +19,7 @@ Patch0:         parted-1.8.6-disksunraid.patch
 # but we don't want this for bootstrapping issue (?)
 # so removing as-needed when detecting libreadline.so otherwise it fails
 Patch1:         parted-1.8.8-fix-readline-detection-in-configure.patch
+Patch2:		gnulib.diff
 Requires(post): info-install
 Requires(preun):info-install
 BuildRequires:  device-mapper-devel
@@ -34,7 +36,7 @@ Group:          Development/C
 Requires:       e2fsprogs
 Obsoletes:      %{mklibname %{name} 1.7} = %{version}
 
-%package -n %{libname}-devel
+%package -n %{develname}
 Summary:        Files required to compile software that uses libparted
 Group:          Development/C
 Requires:       e2fsprogs
@@ -58,7 +60,7 @@ usage, and copying data to new hard disks.
 %description -n %{libname}
 This package includes the dynamic libraries
 
-%description -n %{libname}-devel
+%description -n %{develname}
 This package includes the header files and libraries needed to
 link software with libparted.
 
@@ -66,11 +68,12 @@ link software with libparted.
 %setup -q
 %patch0 -p1
 %patch1 -p0
+%patch2 -p0
 
 %build
 #aclocal
 #autoconf
-%configure2_5x --disable-Werror --enable-device-mapper --without-readline
+%configure2_5x --disable-Werror --enable-device-mapper
 %make
 
 %install
@@ -108,7 +111,7 @@ link software with libparted.
 %doc TODO
 %{_libdir}/lib%{name}-%{major}.so.%{major_}*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root,0755)
 %doc AUTHORS ChangeLog doc/API
 %{_libdir}/*.a
