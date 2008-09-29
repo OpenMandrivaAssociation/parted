@@ -5,7 +5,7 @@
 
 Name:           parted
 Version:        1.8.8
-Release:        %mkrel 3
+Release:        %mkrel 4
 Summary:        Flexible partitioning tool
 License:        GPLv3+
 Group:          System/Configuration/Hardware
@@ -46,7 +46,7 @@ Provides:       libparted%{major}-devel = %{version}
 Provides:       parted-devel = %{version}
 Provides:       %{_lib}parted%{major}-devel = %{version}
 Obsoletes:	%{mklibname -d parted 1.8 7} < %{version}
-Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}
+Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}-%{release}
 Obsoletes:	%{mklibname -d parted 1.8 2} < %{version}
 Obsoletes:      %{mklibname -d parted 1.8 1} < %{version}
 Obsoletes:	%{mklibname -d parted 1.7 1} < %{version}
