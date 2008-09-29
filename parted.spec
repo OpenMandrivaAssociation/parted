@@ -5,7 +5,7 @@
 
 Name:           parted
 Version:        1.8.8
-Release:        %mkrel 2
+Release:        %mkrel 3
 Summary:        Flexible partitioning tool
 License:        GPLv3+
 Group:          System/Configuration/Hardware
@@ -45,11 +45,11 @@ Provides:       libparted-devel = %{version}
 Provides:       libparted%{major}-devel = %{version}
 Provides:       parted-devel = %{version}
 Provides:       %{_lib}parted%{major}-devel = %{version}
-Obsoletes:      parted-devel < %{version}
-Conflicts:      libparted1.7_1-devel
-Conflicts:      libparted1.8_1-devel
-Conflicts:      libparted1.8_2-devel
-Conflicts:      libparted1.8_7-devel
+Obsoletes:	%{mklibname -d parted 1.8 7} < %{version}
+Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}
+Obsoletes:	%{mklibname -d parted 1.8 2} < %{version}
+Obsoletes:      %{mklibname -d parted 1.8 1} < %{version}
+Obsoletes:	%{mklibname -d parted 1.7 1} < %{version}
 
 %description
 GNU Parted is a program that allows you to create, destroy,
