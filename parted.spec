@@ -71,6 +71,7 @@ link software with libparted.
 %patch2 -p0
 
 %build
+libtoolize --install --force
 %configure2_5x --disable-Werror --enable-device-mapper
 %make
 
@@ -100,7 +101,7 @@ link software with libparted.
 %files -f %{name}.lang
 %defattr(-,root,root,0755)
 %doc README
-%{_sbindir}/*
+%{_bindir}/*
 %{_sbindir}/*
 %{_mandir}/man*/*
 %{_infodir}/parted.info*
