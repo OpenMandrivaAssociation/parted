@@ -28,6 +28,7 @@ BuildRequires:  libe2fsprogs-devel
 BuildRequires:  libgpm-devel
 BuildRequires:  libncurses-devel
 BuildRequires:  libreadline-devel
+BuildConflicts: check-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %package -n %{libname}
@@ -101,7 +102,6 @@ libtoolize --install --force
 %files -f %{name}.lang
 %defattr(-,root,root,0755)
 %doc README
-%{_bindir}/*
 %{_sbindir}/*
 %{_mandir}/man*/*
 %{_infodir}/parted.info*
