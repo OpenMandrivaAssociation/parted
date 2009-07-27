@@ -1,25 +1,23 @@
-%define major   1.8
-%define major_  8
+%define major   1.9
+%define major_  0
 %define libname %mklibname %{name}%{major}_ %{major_}
 %define develname %mklibname %{name} -d
 
 Name:           parted
-Version:        1.8.8
-Release:        %mkrel 5
+Version:        1.9.0
+Release:        %mkrel 1
 Summary:        Flexible partitioning tool
 License:        GPLv3+
 Group:          System/Configuration/Hardware
 URL:            http://www.gnu.org/software/parted/
-Source0:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.bz2
-Source1:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.bz2.sha1
-Source2:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.bz2.sha1.sig
-Source3:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.bz2.sig
-Patch0:         parted-1.8.6-disksunraid.patch
+Source0:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz
+Source1:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
+#Patch0:         parted-1.8.6-disksunraid.patch
 # libreadline.so should refer libncurses.so since it needs it,
 # but we don't want this for bootstrapping issue (?)
 # so removing as-needed when detecting libreadline.so otherwise it fails
-Patch1:         parted-1.8.8-fix-readline-detection-in-configure.patch
-Patch2:		gnulib.diff
+#Patch1:         parted-1.8.8-fix-readline-detection-in-configure.patch
+#Patch2:		gnulib.diff
 Requires(post): info-install
 Requires(preun):info-install
 BuildRequires:  device-mapper-devel
@@ -67,13 +65,13 @@ link software with libparted.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p0
-%patch2 -p0
+#%patch0 -p1
+#%patch1 -p0
+#%patch2 -p0
 
 %build
-libtoolize --install --force
-%configure2_5x --disable-Werror --enable-device-mapper
+#libtoolize --install --force
+%configure2_5x --enable-Werror --enable-device-mapper --with-readline
 %make
 
 %install
