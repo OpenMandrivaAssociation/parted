@@ -5,7 +5,7 @@
 
 Name:           parted
 Version:        1.9.0
-Release:        %mkrel 1
+Release:        %mkrel 2
 Summary:        Flexible partitioning tool
 License:        GPLv3+
 Group:          System/Configuration/Hardware
@@ -23,6 +23,7 @@ Requires(preun):info-install
 BuildRequires:  device-mapper-devel
 BuildRequires:  gettext-devel
 BuildRequires:  libe2fsprogs-devel
+BuildRequires:  libuuid-devel
 BuildRequires:  libgpm-devel
 BuildRequires:  libncurses-devel
 BuildRequires:  libreadline-devel
