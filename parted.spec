@@ -72,7 +72,10 @@ link software with libparted.
 
 %build
 #libtoolize --install --force
-%configure2_5x --enable-Werror --enable-device-mapper --with-readline
+%configure2_5x	--enable-Werror \
+		--enable-device-mapper \
+		--with-readline \
+		--with-pic
 %make
 
 %install
