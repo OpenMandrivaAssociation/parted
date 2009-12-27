@@ -1,23 +1,17 @@
-%define major   1.9
-%define major_  0
-%define libname %mklibname %{name}%{major}_ %{major_}
+%define api   2.1
+%define major  0
+%define libname %mklibname %{name} %{api} %{major}
 %define develname %mklibname %{name} -d
 
 Name:           parted
-Version:        1.9.0
-Release:        %mkrel 2
+Version:        2.1
+Release:        %mkrel 1
 Summary:        Flexible partitioning tool
 License:        GPLv3+
 Group:          System/Configuration/Hardware
 URL:            http://www.gnu.org/software/parted/
 Source0:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz
 Source1:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
-#Patch0:         parted-1.8.6-disksunraid.patch
-# libreadline.so should refer libncurses.so since it needs it,
-# but we don't want this for bootstrapping issue (?)
-# so removing as-needed when detecting libreadline.so otherwise it fails
-#Patch1:         parted-1.8.8-fix-readline-detection-in-configure.patch
-#Patch2:		gnulib.diff
 Requires(post): info-install
 Requires(preun):info-install
 BuildRequires:  device-mapper-devel
@@ -42,9 +36,9 @@ Group:          Development/C
 Requires:       e2fsprogs
 Requires:       %{libname} = %{version}
 Provides:       libparted-devel = %{version}
-Provides:       libparted%{major}-devel = %{version}
+Provides:       libparted%{api}-devel = %{version}
 Provides:       parted-devel = %{version}
-Provides:       %{_lib}parted%{major}-devel = %{version}
+Provides:       %{_lib}parted%{api}-devel = %{version}
 Obsoletes:	%{mklibname -d parted 1.8 7} < %{version}
 Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}-%{release}
 Obsoletes:	%{mklibname -d parted 1.8 2} < %{version}
@@ -66,12 +60,8 @@ link software with libparted.
 
 %prep
 %setup -q
-#%patch0 -p1
-#%patch1 -p0
-#%patch2 -p0
 
 %build
-#libtoolize --install --force
 %configure2_5x	--enable-Werror \
 		--enable-device-mapper \
 		--with-readline \
@@ -111,7 +101,7 @@ link software with libparted.
 %files -n %{libname}
 %defattr(-,root,root,0755)
 %doc TODO
-%{_libdir}/lib%{name}-%{major}.so.%{major_}*
+%{_libdir}/lib%{name}-%{api}.so.%{major}*
 
 %files -n %{develname}
 %defattr(-,root,root,0755)
