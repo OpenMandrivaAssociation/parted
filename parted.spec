@@ -25,7 +25,7 @@ BuildConflicts: check-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %package -n %{libname}
-Summary:        Files required to compile software that uses libparted
+Summary:        The parted library
 Group:          Development/C
 Requires:       e2fsprogs
 Obsoletes:      %{mklibname %{name} 1.7} = %{version}
