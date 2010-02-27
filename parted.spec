@@ -20,6 +20,7 @@ BuildRequires:  libuuid-devel
 BuildRequires:  libgpm-devel
 BuildRequires:  libncurses-devel
 BuildRequires:  libreadline-devel
+BuildRequires:	util-linux
 BuildConflicts: check-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -72,6 +73,10 @@ link software with libparted.
 %makeinstall_std
 
 %find_lang %{name}
+
+%check
+export PATH=$PATH:/sbin
+make check
 
 %clean
 %{__rm} -rf %{buildroot}
