@@ -1,10 +1,9 @@
-%define api   2.1
 %define major  0
-%define libname %mklibname %{name} %{api} %{major}
+%define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Name:           parted
-Version:        2.1
+Version:        2.2
 Release:        %mkrel 1
 Summary:        Flexible partitioning tool
 License:        GPLv3+
@@ -101,7 +100,7 @@ link software with libparted.
 %files -n %{libname}
 %defattr(-,root,root,0755)
 %doc TODO
-%{_libdir}/lib%{name}-%{api}.so.%{major}*
+%{_libdir}/lib%{name}.so.%{major}*
 
 %files -n %{develname}
 %defattr(-,root,root,0755)
