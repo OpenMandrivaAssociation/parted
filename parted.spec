@@ -3,7 +3,7 @@
 %define develname %mklibname %{name} -d
 
 Name:           parted
-Version:        2.2
+Version:        2.3
 Release:        %mkrel 1
 Summary:        Flexible partitioning tool
 License:        GPLv3+
