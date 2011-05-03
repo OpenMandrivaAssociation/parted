@@ -1,3 +1,4 @@
+%define Werror_cflags %nil
 %define major  0
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -66,7 +67,7 @@ link software with libparted.
 %patch0 -p1
 
 %build
-%configure2_5x	--enable-Werror \
+%configure2_5x	--disable-Werror \
 		--enable-device-mapper \
 		--with-readline \
 		--with-pic
