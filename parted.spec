@@ -5,7 +5,7 @@
 
 Name:           parted
 Version:        2.3
-Release:        %mkrel 3
+Release:        %mkrel 4
 Summary:        Flexible partitioning tool
 License:        GPLv3+
 Group:          System/Configuration/Hardware
