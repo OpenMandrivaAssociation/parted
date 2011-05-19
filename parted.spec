@@ -12,9 +12,6 @@ Group:          System/Configuration/Hardware
 URL:            http://www.gnu.org/software/parted/
 Source0:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz
 Source1:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
-# upstream commit 244b1b25a12198efb076e8c65be77b5750776583
-Patch0:		parted-2.3-assert.patch
-Patch1:		parted-2.3-assert2.patch
 Requires(post): info-install
 Requires(preun):info-install
 BuildRequires:  device-mapper-devel
@@ -64,7 +61,6 @@ link software with libparted.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %configure2_5x	--disable-Werror \
