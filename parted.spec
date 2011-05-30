@@ -1,10 +1,10 @@
 %define Werror_cflags %nil
-%define major  0
+%define major  1
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Name:           parted
-Version:        2.4
+Version:        3.0
 Release:        %mkrel 1
 Summary:        Flexible partitioning tool
 License:        GPLv3+
@@ -22,7 +22,6 @@ BuildRequires:  libgpm-devel
 BuildRequires:  libncurses-devel
 BuildRequires:  libreadline-devel
 BuildRequires:	util-linux
-BuildConflicts: check-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %package -n %{libname}
@@ -63,7 +62,7 @@ link software with libparted.
 %setup -q
 
 %build
-%configure2_5x	--disable-Werror \
+%configure2_5x	\
 		--enable-device-mapper \
 		--with-readline \
 		--with-pic
