@@ -5,7 +5,7 @@
 
 Name:           parted
 Version:        3.0
-Release:        %mkrel 1
+Release:        2
 Summary:        Flexible partitioning tool
 License:        GPLv3+
 Group:          System/Configuration/Hardware
@@ -22,15 +22,14 @@ BuildRequires:  libgpm-devel
 BuildRequires:  libncurses-devel
 BuildRequires:  libreadline-devel
 BuildRequires:	util-linux
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
-%package -n %{libname}
+%package -n	%{libname}
 Summary:        The parted library
 Group:          Development/C
 Requires:       e2fsprogs
 Obsoletes:      %{mklibname %{name} 1.7} = %{version}
 
-%package -n %{develname}
+%package -n	%{develname}
 Summary:        Files required to compile software that uses libparted
 Group:          Development/C
 Requires:       e2fsprogs
@@ -62,14 +61,12 @@ link software with libparted.
 %setup -q
 
 %build
-%configure2_5x	\
-		--enable-device-mapper \
+%configure2_5x	--enable-device-mapper \
 		--with-readline \
 		--with-pic
 %make
 
 %install
-%{__rm} -rf %{buildroot}
 %makeinstall_std
 
 %find_lang %{name}
@@ -78,37 +75,23 @@ link software with libparted.
 export PATH=$PATH:/sbin
 make check
 
-%clean
-%{__rm} -rf %{buildroot}
-
 %post
 %_install_info %{name}
 
 %preun
 %_remove_install_info %{name}
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files -f %{name}.lang
-%defattr(-,root,root,0755)
 %doc README
 %{_sbindir}/*
 %{_mandir}/man*/*
 %{_infodir}/parted.info*
 
 %files -n %{libname}
-%defattr(-,root,root,0755)
 %doc TODO
 %{_libdir}/lib%{name}.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root,0755)
 %doc AUTHORS ChangeLog doc/API
 %{_libdir}/*.a
 %{_libdir}/*.so
