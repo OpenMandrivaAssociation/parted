@@ -35,9 +35,7 @@ Group:          Development/C
 Requires:       e2fsprogs
 Requires:       %{libname} = %{version}
 Provides:       libparted-devel = %{version}
-Provides:       libparted%{api}-devel = %{version}
 Provides:       parted-devel = %{version}
-Provides:       %{_lib}parted%{api}-devel = %{version}
 Obsoletes:	%{mklibname -d parted 1.8 7} < %{version}
 Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}-%{release}
 Obsoletes:	%{mklibname -d parted 1.8 2} < %{version}
@@ -59,6 +57,7 @@ link software with libparted.
 
 %prep
 %setup -q
+autoreconf -fi
 
 %build
 %configure2_5x	--enable-device-mapper \
