@@ -95,6 +95,5 @@ make check
 %doc AUTHORS ChangeLog doc/API
 %{_libdir}/*.a
 %{_libdir}/*.so
-%{_libdir}/*.la
 %{_includedir}/*
 %{_libdir}/pkgconfig/libparted.pc
