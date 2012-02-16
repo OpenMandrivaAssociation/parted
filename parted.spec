@@ -5,7 +5,7 @@
 
 Name:           parted
 Version:        3.0
-Release:        2
+Release:        3
 Summary:        Flexible partitioning tool
 License:        GPLv3+
 Group:          System/Configuration/Hardware
@@ -34,7 +34,6 @@ Summary:        Files required to compile software that uses libparted
 Group:          Development/C
 Requires:       e2fsprogs
 Requires:       %{libname} = %{version}
-Provides:       libparted-devel = %{version}
 Provides:       parted-devel = %{version}
 Obsoletes:	%{mklibname -d parted 1.8 7} < %{version}
 Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}-%{release}
