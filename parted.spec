@@ -1,40 +1,40 @@
 %define Werror_cflags %nil
-%define major  1
-%define libname %mklibname %{name} %{major}
-%define develname %mklibname %{name} -d
+%define	major 	1
+%define	libname	%mklibname %{name} %{major}
+%define	devname	%mklibname %{name} -d
 
-Name:           parted
-Version:        3.0
-Release:        3
-Summary:        Flexible partitioning tool
-License:        GPLv3+
-Group:          System/Configuration/Hardware
-URL:            http://www.gnu.org/software/parted/
-Source0:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz
-Source1:        http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
-Requires(post): info-install
+Name:		parted
+Version:	3.0
+Release:	3
+Summary:	Flexible partitioning tool
+License:	GPLv3+
+Group:		System/Configuration/Hardware
+URL:		http://www.gnu.org/software/parted/
+Source0:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz
+Source1:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
+Requires(post):	info-install
 Requires(preun):info-install
-BuildRequires:  device-mapper-devel
-BuildRequires:  gettext-devel
-BuildRequires:  libe2fsprogs-devel
-BuildRequires:  libuuid-devel
-BuildRequires:  libgpm-devel
-BuildRequires:  libncurses-devel
-BuildRequires:  libreadline-devel
+BuildRequires:	device-mapper-devel
+BuildRequires:	gettext-devel
+BuildRequires:	libe2fsprogs-devel
+BuildRequires:	libuuid-devel
+BuildRequires:	libgpm-devel
+BuildRequires:	libncurses-devel
+BuildRequires:	libreadline-devel
 BuildRequires:	util-linux
 
 %package -n	%{libname}
-Summary:        The parted library
-Group:          Development/C
-Requires:       e2fsprogs
-Obsoletes:      %{mklibname %{name} 1.7} = %{version}
+Summary:	The parted library
+Group:		Development/C
+Requires:	e2fsprogs
+Obsoletes:	%{mklibname %{name} 1.7} = %{version}
 
-%package -n	%{develname}
-Summary:        Files required to compile software that uses libparted
-Group:          Development/C
-Requires:       e2fsprogs
-Requires:       %{libname} = %{version}
-Provides:       parted-devel = %{version}
+%package -n	%{devname}
+Summary:	Files required to compile software that uses libparted
+Group:		Development/C
+Requires:	e2fsprogs
+Requires:	%{libname} = %{version}
+Provides:	parted-devel = %{version}
 Obsoletes:	%{mklibname -d parted 1.8 7} < %{version}
 Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}-%{release}
 Obsoletes:	%{mklibname -d parted 1.8 2} < %{version}
@@ -50,7 +50,7 @@ usage, and copying data to new hard disks.
 %description -n %{libname}
 This package includes the dynamic libraries
 
-%description -n %{develname}
+%description -n %{devname}
 This package includes the header files and libraries needed to
 link software with libparted.
 
@@ -89,7 +89,7 @@ make check
 %doc TODO
 %{_libdir}/lib%{name}.so.%{major}*
 
-%files -n %{develname}
+%files -n %{devname}
 %doc AUTHORS ChangeLog doc/API
 %{_libdir}/*.a
 %{_libdir}/*.so
