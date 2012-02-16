@@ -21,11 +21,11 @@ BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel
+Requires:	e2fsprogs
 
 %package -n	%{libname}
 Summary:	The parted library
 Group:		Development/C
-Requires:	e2fsprogs
 Obsoletes:	%{mklibname %{name} 1.7} = %{version}
 
 %package -n	%{devname}
