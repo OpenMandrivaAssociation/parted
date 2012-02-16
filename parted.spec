@@ -14,14 +14,13 @@ Source0:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz
 Source1:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
 Requires(post):	info-install
 Requires(preun):info-install
-BuildRequires:	device-mapper-devel
+BuildRequires:	pkgconfig(devmapper)
 BuildRequires:	gettext-devel
-BuildRequires:	libe2fsprogs-devel
-BuildRequires:	libuuid-devel
-BuildRequires:	libgpm-devel
-BuildRequires:	libncurses-devel
-BuildRequires:	libreadline-devel
-BuildRequires:	util-linux
+BuildRequires:	pkgconfig(ext2fs)
+BuildRequires:	pkgconfig(uuid)
+BuildRequires:	gpm-devel
+BuildRequires:	ncurses-devel
+BuildRequires:	readline-devel
 
 %package -n	%{libname}
 Summary:	The parted library
