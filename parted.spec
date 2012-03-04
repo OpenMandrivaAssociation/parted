@@ -3,8 +3,8 @@
 %define	devname	%mklibname %{name} -d
 
 Name:		parted
-Version:	3.0
-Release:	3
+Version:	3.1
+Release:	1
 Summary:	Flexible partitioning tool
 License:	GPLv3+
 Group:		System/Configuration/Hardware
@@ -14,7 +14,7 @@ Source1:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
 Requires(post):	info-install
 Requires(preun):info-install
 BuildRequires:	pkgconfig(devmapper)
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gpm-devel
@@ -36,7 +36,7 @@ Provides:	parted-devel = %{version}
 Obsoletes:	%{mklibname -d parted 1.8 7} < %{version}
 Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}-%{release}
 Obsoletes:	%{mklibname -d parted 1.8 2} < %{version}
-Obsoletes:      %{mklibname -d parted 1.8 1} < %{version}
+Obsoletes:	%{mklibname -d parted 1.8 1} < %{version}
 Obsoletes:	%{mklibname -d parted 1.7 1} < %{version}
 
 %description
