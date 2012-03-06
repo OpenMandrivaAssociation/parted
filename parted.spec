@@ -1,6 +1,11 @@
-%define	major	1
-%define	libname	%mklibname %{name} %{major}
-%define	devname	%mklibname %{name} -d
+%define _disable_ld_no_undefined 1
+
+%define	major		2
+%define	libname		%mklibname %{name} %{major}
+%define	devname		%mklibname %{name} -d
+
+%define	fsresize_major	0
+%define	libfsresize	%mklibname %{name}-fs-resize %{fsresize_major}
 
 Name:		parted
 Version:	3.1
@@ -14,7 +19,7 @@ Source1:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
 Requires(post):	info-install
 Requires(preun):info-install
 BuildRequires:	pkgconfig(devmapper)
-BuildRequires:	gettext-devel >= 0.18
+BuildRequires:	gettext-devel
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gpm-devel
@@ -27,11 +32,16 @@ Summary:	The parted library
 Group:		Development/C
 Obsoletes:	%{mklibname %{name} 1.7} = %{version}
 
+%package -n	%{libfsresize}
+Summary:	The parted fs-resize library
+Group:		Development/C
+
 %package -n	%{devname}
 Summary:	Files required to compile software that uses libparted
 Group:		Development/C
 Requires:	e2fsprogs
 Requires:	%{libname} = %{version}
+Requires:	%{libfsresize} = %{version}
 Provides:	parted-devel = %{version}
 Obsoletes:	%{mklibname -d parted 1.8 7} < %{version}
 Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}-%{release}
@@ -46,6 +56,9 @@ creating space for new operating systems, reorganising disk
 usage, and copying data to new hard disks.
 
 %description -n %{libname}
+This package includes the dynamic libraries
+
+%description -n %{libfsresize}
 This package includes the dynamic libraries
 
 %description -n %{devname}
@@ -87,9 +100,14 @@ make check
 %doc TODO
 %{_libdir}/lib%{name}.so.%{major}*
 
+%files -n %{libfsresize}
+%{_libdir}/lib%{name}-fs-resize.so.%{fsresize_major}*
+
+
 %files -n %{devname}
 %doc AUTHORS ChangeLog doc/API
 %{_libdir}/*.a
 %{_libdir}/*.so
+%{_libdir}/*.la
 %{_includedir}/*
 %{_libdir}/pkgconfig/libparted.pc
