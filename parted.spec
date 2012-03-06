@@ -19,7 +19,7 @@ Source1:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
 Requires(post):	info-install
 Requires(preun):info-install
 BuildRequires:	pkgconfig(devmapper)
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gpm-devel
