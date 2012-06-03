@@ -9,15 +9,13 @@
 
 Name:		parted
 Version:	3.1
-Release:	1
+Release:	2
 Summary:	Flexible partitioning tool
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 URL:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz
 Source1:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
-Requires(post):	info-install
-Requires(preun):info-install
 BuildRequires:	pkgconfig(devmapper)
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	pkgconfig(ext2fs)
@@ -84,12 +82,6 @@ autoreconf -fi
 export PATH=$PATH:/sbin
 make check
 
-%post
-%_install_info %{name}
-
-%preun
-%_remove_install_info %{name}
-
 %files -f %{name}.lang
 %doc README
 %{_sbindir}/*
@@ -103,11 +95,9 @@ make check
 %files -n %{libfsresize}
 %{_libdir}/lib%{name}-fs-resize.so.%{fsresize_major}*
 
-
 %files -n %{devname}
 %doc AUTHORS ChangeLog doc/API
 %{_libdir}/*.a
 %{_libdir}/*.so
-%{_libdir}/*.la
 %{_includedir}/*
 %{_libdir}/pkgconfig/libparted.pc
