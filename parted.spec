@@ -109,7 +109,8 @@ pushd uclibc
 		--sbindir=%{uclibc_root}%{_sbindir} \
 		--enable-device-mapper \
 		--without-readline \
-		--with-pic
+		--with-pic \
+		--disable-assert
 %make V=1 CC=%{uclibc_cc} CFLAGS="%{uclibc_cflags}"
 popd
 %endif
