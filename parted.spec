@@ -25,7 +25,6 @@ BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gpm-devel
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	readline-devel
-Requires:	e2fsprogs
 
 %package -n	uclibc-%{name}
 Summary:	Flexible partitioning tool
@@ -51,7 +50,6 @@ Group:		Development/C
 %package -n	%{devname}
 Summary:	Files required to compile software that uses lib%{name}
 Group:		Development/C
-Requires:	e2fsprogs
 Requires:	%{libname} = %{version}
 Requires:	%{libfsresize} = %{version}
 %if %{with uclibc}
