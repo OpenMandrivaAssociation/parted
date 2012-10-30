@@ -16,14 +16,14 @@ Summary:	Flexible partitioning tool
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 URL:		http://www.gnu.org/software/parted/
-Source0:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz
-Source1:	http://ftp.gnu.org/gnu/parted/parted-%{version}.tar.xz.sig
+Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
+Source1:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz.sig
 BuildRequires:	pkgconfig(devmapper)
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gpm-devel
-BuildRequires:	ncurses-devel
+BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	readline-devel
 Requires:	e2fsprogs
 
@@ -49,7 +49,7 @@ Summary:	The parted fs-resize library (uClibc linked)
 Group:		Development/C
 
 %package -n	%{devname}
-Summary:	Files required to compile software that uses libparted
+Summary:	Files required to compile software that uses lib%{name}
 Group:		Development/C
 Requires:	e2fsprogs
 Requires:	%{libname} = %{version}
@@ -91,22 +91,19 @@ This package includes the dynamic libraries
 
 %description -n %{devname}
 This package includes the header files and libraries needed to
-link software with libparted.
+link software with lib%{name}.
 
 %prep
 %setup -q
 autoreconf -fi
 
 %build
-export CONFIGURE_TOP=$PWD
+CONFIGURE_TOP="$PWD"
 
 %if %{with uclibc}
 mkdir -p uclibc
 pushd uclibc
-%configure2_5x	CC=%{uclibc_cc} \
-		CFLAGS="%{uclibc_cflags}" \
-		--libdir=%{uclibc_root}%{_libdir} \
-		--sbindir=%{uclibc_root}%{_sbindir} \
+%uclibc_configure \
 		--enable-device-mapper \
 		--without-readline \
 		--with-pic \
@@ -138,8 +135,10 @@ make -C system check
 
 %files -f %{name}.lang
 %doc README
-%{_sbindir}/*
-%{_mandir}/man*/*
+%{_sbindir}/parted
+%{_sbindir}/partprobe
+%{_mandir}/man8/parted.8*
+%{_mandir}/man8/partprobe.8*
 %{_infodir}/parted.info*
 
 %if %{with uclibc}
@@ -149,7 +148,6 @@ make -C system check
 %endif
 
 %files -n %{libname}
-%doc TODO
 %{_libdir}/lib%{name}.so.%{major}*
 
 %if %{with uclibc}
@@ -166,12 +164,17 @@ make -C system check
 %endif
 
 %files -n %{devname}
-%doc AUTHORS ChangeLog doc/API
-%{_libdir}/lib*.a
-%{_libdir}/lib*.so
+%doc AUTHORS ChangeLog doc/API TODO
+%{_libdir}/lib%{name}.a
+%{_libdir}/lib%{name}.so
+%{_libdir}/lib%{name}-fs-resize.a
+%{_libdir}/lib%{name}-fs-resize.so
 %if %{with uclibc}
-%{uclibc_root}%{_libdir}/lib*.a
-%{uclibc_root}%{_libdir}/lib*.so
+%{uclibc_root}%{_libdir}/lib%{name}.a
+%{uclibc_root}%{_libdir}/lib%{name}.so
+%{uclibc_root}%{_libdir}/lib%{name}-fs-resize.a
+%{uclibc_root}%{_libdir}/lib%{name}-fs-resize.so
 %endif
-%{_includedir}/*
-%{_libdir}/pkgconfig/libparted.pc
+%dir %{_includedir}/%{name}
+%{_includedir}/%{name}/*
+%{_libdir}/pkgconfig/lib%{name}.pc
