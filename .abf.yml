@@ -1,3 +1,2 @@
 sources:
-  "parted-3.1.tar.xz:"	4f006d29451f7cfbf6131efdb0148e7f386ebc8f
-  "parted-3.1.tar.xz.sig:"	4faf5b4eb2c78eb4f27ee3a4d6676fd4dd7f2c49
+  parted-3.1.tar.xz: 4f006d29451f7cfbf6131efdb0148e7f386ebc8f
