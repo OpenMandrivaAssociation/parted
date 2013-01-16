@@ -11,7 +11,7 @@
 
 Name:		parted
 Version:	3.1
-Release:	4
+Release:	5
 Summary:	Flexible partitioning tool
 License:	GPLv3+
 Group:		System/Configuration/Hardware
@@ -119,7 +119,7 @@ mkdir -p uclibc
 pushd uclibc
 %uclibc_configure \
 		--enable-device-mapper \
-		--without-readline \
+		--with-readline \
 		--with-pic \
 		--disable-assert
 %make V=1 CC=%{uclibc_cc} CFLAGS="%{uclibc_cflags}"
