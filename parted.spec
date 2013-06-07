@@ -11,7 +11,7 @@
 
 Name:		parted
 Version:	3.1
-Release:	5
+Release:	6
 Summary:	Flexible partitioning tool
 License:	GPLv3+
 Group:		System/Configuration/Hardware
