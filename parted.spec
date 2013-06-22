@@ -1,21 +1,21 @@
 %define _disable_ld_no_undefined 1
 
-%define	major		2
-%define	libname		%mklibname %{name} %{major}
-%define	devname		%mklibname %{name} -d
+%define	major	2
+%define	libname	%mklibname %{name} %{major}
+%define	devname	%mklibname %{name} -d
 
 %define	fsresize_major	0
 %define	libfsresize	%mklibname %{name}-fs-resize %{fsresize_major}
 
 %bcond_without	uclibc
 
+Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.1
 Release:	6
-Summary:	Flexible partitioning tool
 License:	GPLv3+
 Group:		System/Configuration/Hardware
-URL:		http://www.gnu.org/software/parted/
+Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 Source1:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz.sig
 
@@ -33,13 +33,13 @@ Patch10:	parted-3.1-tests-cleanup-losetup-usage.patch
 Patch11:	parted-3.1-libparted-add-support-for-implicit-FBA-DASD-partitions.patch
 Patch12:	parted-3.1-libparted-add-support-for-EAV-DASD-partitions.patch
 
-BuildRequires:	pkgconfig(devmapper)
 BuildRequires:	gettext-devel >= 0.18
-BuildRequires:	pkgconfig(ext2fs)
-BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gpm-devel
-BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	readline-devel
+BuildRequires:	pkgconfig(devmapper)
+BuildRequires:	pkgconfig(ext2fs)
+BuildRequires:	pkgconfig(ncursesw)
+BuildRequires:	pkgconfig(uuid)
 
 %package -n	uclibc-%{name}
 Summary:	Flexible partitioning tool
@@ -48,7 +48,6 @@ Group:		System/Configuration/Hardware
 %package -n	%{libname}
 Summary:	The parted library
 Group:		Development/C
-Obsoletes:	%{mklibname %{name} 1.7} = %{version}
 
 %package -n	uclibc-%{libname}
 Summary:	The parted library (uClibc linked) (uClibc linked)
@@ -65,18 +64,13 @@ Group:		Development/C
 %package -n	%{devname}
 Summary:	Files required to compile software that uses lib%{name}
 Group:		Development/C
-Requires:	%{libname} = %{version}
-Requires:	%{libfsresize} = %{version}
+Requires:	%{libname} = %{EVRD}
+Requires:	%{libfsresize} = %{EVRD}
 %if %{with uclibc}
 Requires:	uclibc-%{libname} = %{EVRD}
 Requires:	uclibc-%{libfsresize} = %{EVRD}
 %endif
-Provides:	parted-devel = %{version}
-Obsoletes:	%{mklibname -d parted 1.8 7} < %{version}
-Obsoletes:	%{mklibname -d parted 1.8 8} < %{version}-%{release}
-Obsoletes:	%{mklibname -d parted 1.8 2} < %{version}
-Obsoletes:	%{mklibname -d parted 1.8 1} < %{version}
-Obsoletes:	%{mklibname -d parted 1.7 1} < %{version}
+Provides:	parted-devel = %{EVRD}
 
 %description
 GNU Parted is a program that allows you to create, destroy,
@@ -118,19 +112,20 @@ CONFIGURE_TOP="$PWD"
 mkdir -p uclibc
 pushd uclibc
 %uclibc_configure \
-		--enable-device-mapper \
-		--with-readline \
-		--with-pic \
-		--disable-assert
+	--enable-device-mapper \
+	--with-readline \
+	--with-pic \
+	--disable-assert
 %make V=1 CC=%{uclibc_cc} CFLAGS="%{uclibc_cflags}"
 popd
 %endif
 
 mkdir -p system
 pushd system
-%configure2_5x	--enable-device-mapper \
-		--with-readline \
-		--with-pic
+%configure2_5x \
+	--enable-device-mapper \
+	--with-readline \
+	--with-pic
 %make
 popd
 
@@ -193,3 +188,4 @@ make -C system check || /bin/true
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/*
 %{_libdir}/pkgconfig/lib%{name}.pc
+
