@@ -32,6 +32,7 @@ Patch9:		parted-3.1-libparted-reallocate-buf-after-_disk_analyse_block_s.patch
 Patch10:	parted-3.1-tests-cleanup-losetup-usage.patch
 Patch11:	parted-3.1-libparted-add-support-for-implicit-FBA-DASD-partitions.patch
 Patch12:	parted-3.1-libparted-add-support-for-EAV-DASD-partitions.patch
+Patch13:	0082-ui-switch-to-new-style-readline-typedef.patch
 
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	gpm-devel
@@ -114,6 +115,7 @@ pushd uclibc
 %uclibc_configure \
 	--enable-device-mapper \
 	--with-readline \
+	--enable-static \
 	--with-pic \
 	--disable-assert
 %make V=1 CC=%{uclibc_cc} CFLAGS="%{uclibc_cflags}"
@@ -122,8 +124,9 @@ popd
 
 mkdir -p system
 pushd system
-%configure2_5x \
+%configure \
 	--enable-device-mapper \
+	--enable-static \
 	--with-readline \
 	--with-pic
 %make
