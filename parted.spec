@@ -12,12 +12,13 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 Source1:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz.sig
+Patch0:		parted-3.2-parted-fs-resize-uuid-linkage.patch
 
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	gpm-devel
