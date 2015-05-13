@@ -11,27 +11,14 @@
 
 Summary:	Flexible partitioning tool
 Name:		parted
-Version:	3.1
-Release:	7
+Version:	3.2
+Release:	0.1
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 Source1:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz.sig
-
-Patch0:		parted-3.0-libparted-copy-pmbr_boot-when-duplicating-GPT-disk.patch
-Patch1:		parted-3.1-libparted-check-PMBR-before-GPT-partition-table-8052.patch
-Patch2:		parted-3.1-tests-add-t0301-overwrite-gpt-pmbr.sh.patch
-Patch3:		parted-3.1-libparted-Fix-endian-error-with-FirstUsableLBA.patch
-Patch4:		parted-2.1-libparted-use-dm_udev_wait-698121.patch
-Patch5:		parted-3.1-libparted-use-largest_partnum-in-dm_reread_part_tabl.patch
-patch6:		parted-3.1-test-creating-20-device-mapper-partitions.patch
-Patch7:		parted-3.1-libparted-preserve-the-uuid-on-dm-partitions.patch
-Patch8:		parted-3.1-tests-Make-sure-dm-UUIDs-are-not-erased.patch
-Patch9:		parted-3.1-libparted-reallocate-buf-after-_disk_analyse_block_s.patch
-Patch10:	parted-3.1-tests-cleanup-losetup-usage.patch
-Patch11:	parted-3.1-libparted-add-support-for-implicit-FBA-DASD-partitions.patch
-Patch12:	parted-3.1-libparted-add-support-for-EAV-DASD-partitions.patch
+Patch0:		parted-3.2-parted-fs-resize-uuid-linkage.patch
 
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	gpm-devel
@@ -103,7 +90,6 @@ link software with lib%{name}.
 %prep
 %setup -q
 %apply_patches
-autoreconf -fi
 
 %build
 CONFIGURE_TOP="$PWD"
@@ -114,6 +100,7 @@ pushd uclibc
 %uclibc_configure \
 	--enable-device-mapper \
 	--with-readline \
+	--enable-static \
 	--with-pic \
 	--disable-assert
 %make V=1 CC=%{uclibc_cc} CFLAGS="%{uclibc_cflags}"
@@ -122,8 +109,9 @@ popd
 
 mkdir -p system
 pushd system
-%configure2_5x \
+%configure \
 	--enable-device-mapper \
+	--enable-static \
 	--with-readline \
 	--with-pic
 %make
