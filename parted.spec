@@ -19,6 +19,7 @@ Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 Source1:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz.sig
 Patch0:		parted-3.2-parted-fs-resize-uuid-linkage.patch
+Patch1:		udevadm-settle.patch
 
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	gpm-devel
