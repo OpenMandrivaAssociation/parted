@@ -12,7 +12,7 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	3
+Release:	4
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
@@ -28,37 +28,14 @@ BuildRequires:	pkgconfig(devmapper)
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(uuid)
-
-%package -n	uclibc-%{name}
-Summary:	Flexible partitioning tool
-Group:		System/Configuration/Hardware
-
-%package -n	%{libname}
-Summary:	The parted library
-Group:		Development/C
-
-%package -n	uclibc-%{libname}
-Summary:	The parted library (uClibc linked) (uClibc linked)
-Group:		Development/C
-
-%package -n	%{libfsresize}
-Summary:	The parted fs-resize library
-Group:		Development/C
-
-%package -n	uclibc-%{libfsresize}
-Summary:	The parted fs-resize library (uClibc linked)
-Group:		Development/C
-
-%package -n	%{devname}
-Summary:	Files required to compile software that uses lib%{name}
-Group:		Development/C
-Requires:	%{libname} = %{EVRD}
-Requires:	%{libfsresize} = %{EVRD}
 %if %{with uclibc}
-Requires:	uclibc-%{libname} = %{EVRD}
-Requires:	uclibc-%{libfsresize} = %{EVRD}
+BuildRequires:	uClibc-devel >= 0.9.33.2-9
+BuildRequires:	uclibc-readline-devel
+BuildRequires:	uclibc-libdevmapper-devel
+BuildRequires:	uclibc-ext2fs-devel
+BuildRequires:	uclibc-ncurses-devel
+BuildRequires:	uclibc-libuuid-devel
 %endif
-Provides:	parted-devel = %{EVRD}
 
 %description
 GNU Parted is a program that allows you to create, destroy,
@@ -66,23 +43,68 @@ resize, move and copy hard disk partitions. This is useful for
 creating space for new operating systems, reorganising disk
 usage, and copying data to new hard disks.
 
+%package -n	%{libname}
+Summary:	The parted library
+Group:		Development/C
+
+%description -n %{libname}
+This package includes the dynamic libraries
+
+%package -n	%{libfsresize}
+Summary:	The parted fs-resize library
+Group:		Development/C
+
+%description -n %{libfsresize}
+This package includes the dynamic libraries
+
+
+
+%if %{with uclibc}
+%package -n	uclibc-%{name}
+Summary:	Flexible partitioning tool
+Group:		System/Configuration/Hardware
+
 %description -n	uclibc-%{name}
 GNU Parted is a program that allows you to create, destroy,
 resize, move and copy hard disk partitions. This is useful for
 creating space for new operating systems, reorganising disk
 usage, and copying data to new hard disks.
 
-%description -n %{libname}
-This package includes the dynamic libraries
+%package -n	uclibc-%{libname}
+Summary:	The parted library (uClibc linked) (uClibc linked)
+Group:		Development/C
 
 %description -n uclibc-%{libname}
 This package includes the dynamic libraries
 
-%description -n %{libfsresize}
-This package includes the dynamic libraries
+%package -n	uclibc-%{libfsresize}
+Summary:	The parted fs-resize library (uClibc linked)
+Group:		Development/C
 
 %description -n uclibc-%{libfsresize}
 This package includes the dynamic libraries
+
+%package -n	uclibc-%{devname}
+Summary:	Files required to compile software that uses lib%{name}
+Group:		Development/C
+Requires:	uclibc-%{libname} = %{EVRD}
+Requires:	uclibc-%{libfsresize} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
+Provides:	uclibc-parted-devel = %{EVRD}
+Provides:	uclibc-libparted-devel = %{EVRD}
+Conflicts:	%{devname} < 3.2-4
+
+%description -n uclibc-%{devname}
+This package includes the header files and libraries needed to
+link software with lib%{name}.
+%endif
+
+%package -n	%{devname}
+Summary:	Files required to compile software that uses lib%{name}
+Group:		Development/C
+Requires:	%{libname} = %{EVRD}
+Requires:	%{libfsresize} = %{EVRD}
+Provides:	parted-devel = %{EVRD}
 
 %description -n %{devname}
 This package includes the header files and libraries needed to
@@ -160,6 +182,12 @@ make -C system check || /bin/true
 %if %{with uclibc}
 %files -n uclibc-%{libfsresize}
 %{uclibc_root}%{_libdir}/lib%{name}-fs-resize.so.%{fsresize_major}*
+
+%files -n uclibc-%{devname}
+%{uclibc_root}%{_libdir}/lib%{name}.a
+%{uclibc_root}%{_libdir}/lib%{name}.so
+%{uclibc_root}%{_libdir}/lib%{name}-fs-resize.a
+%{uclibc_root}%{_libdir}/lib%{name}-fs-resize.so
 %endif
 
 %files -n %{devname}
@@ -168,12 +196,6 @@ make -C system check || /bin/true
 %{_libdir}/lib%{name}.so
 %{_libdir}/lib%{name}-fs-resize.a
 %{_libdir}/lib%{name}-fs-resize.so
-%if %{with uclibc}
-%{uclibc_root}%{_libdir}/lib%{name}.a
-%{uclibc_root}%{_libdir}/lib%{name}.so
-%{uclibc_root}%{_libdir}/lib%{name}-fs-resize.a
-%{uclibc_root}%{_libdir}/lib%{name}-fs-resize.so
-%endif
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/*
 %{_libdir}/pkgconfig/lib%{name}.pc
