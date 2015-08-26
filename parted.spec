@@ -7,12 +7,12 @@
 %define	fsresize_major	0
 %define	libfsresize	%mklibname %{name}-fs-resize %{fsresize_major}
 
-%bcond_without	uclibc
+%bcond_with	uclibc
 
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	5
+Release:	6
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
