@@ -1,5 +1,2 @@
-removed_sources:
-  parted-3.1.tar.xz: 4f006d29451f7cfbf6131efdb0148e7f386ebc8f
 sources:
   parted-3.2.tar.xz: 78db6ca8dd6082c5367c8446bf6f7ae044091959
-  parted-3.2.tar.xz.sig: a9fd31cbe5a279c5532b972881cedd520df9fb4c
