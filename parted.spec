@@ -97,7 +97,7 @@ sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 %make
 
 %install
-%makeinstall_std -C system
+%makeinstall_std
 
 %find_lang %{name}
 
