@@ -17,7 +17,6 @@ Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 Patch0:		parted-3.2-parted-fs-resize-uuid-linkage.patch
 Patch1:		udevadm-settle.patch
-Patch2:		0001-tests-Try-several-UTF8-locales.patch
 
 # (tpg) patches from upstream git
 Patch100:	0000-maint-post-release-administrivia.patch
