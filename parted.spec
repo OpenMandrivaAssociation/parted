@@ -67,6 +67,7 @@ Patch143:	0043-libparted-Fix-probing-AIX-disks-on-other-arches.patch
 # (tpg) from debian, dunno it is usefull for anything
 #Patch500:	udevadm-settle.patch
 
+BuildRequires:	texinfo
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	gpm-devel
 BuildRequires:	readline-devel
