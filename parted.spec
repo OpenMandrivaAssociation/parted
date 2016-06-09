@@ -155,4 +155,4 @@ make -C system check || /bin/true
 %{_libdir}/lib%{name}-fs-resize.so
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/*
-%{_libdir}/pkgconfig/lib%{name}.pc
+%{_libdir}/pkgconfig/lib%{name}*.pc
