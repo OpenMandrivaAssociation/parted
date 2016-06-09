@@ -16,7 +16,7 @@ Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 Patch0:		parted-3.2-parted-fs-resize-uuid-linkage.patch
-Patch1:		udevadm-settle.patch
+
 
 # (tpg) patches from upstream git
 Patch100:	0000-maint-post-release-administrivia.patch
@@ -36,8 +36,8 @@ Patch113:	0013-doc-Fix-url-for-LWN-article.patch
 Patch114:	0014-tests-Make-sure-the-extended-partition-length-is-cor.patch
 Patch115:	0015-libparted-BLKPG_RESIZE_PARTITION-uses-bytes-not-sect.patch
 Patch116:	0016-mac-copy-partition-type-and-name-correctly.patch
-Patch117:	0017-merge-HACKING-and-README-hacking.patch
-Patch118:	0018-Fwd-PATCH-2-2-add-verbose-test-documentation.patch
+#Patch117:	0017-merge-HACKING-and-README-hacking.patch
+#Patch118:	0018-Fwd-PATCH-2-2-add-verbose-test-documentation.patch
 Patch119:	0019-parted-Fix-crash-with-name-command-and-no-disklabel-.patch
 Patch120:	0020-UI-Avoid-memory-leaks.patch
 Patch121:	0021-libparted-Fix-memory-leaks.patch
@@ -63,6 +63,9 @@ Patch140:	0040-bug-17883-PATCH-configure.ac-uclinux-is-also-linux.patch
 Patch141:	0041-Add-NEWS-entry-for-fat-resize-fix.patch
 Patch142:	0042-libparted-Remove-fdasd-geometry-code-from-alloc_meta.patch
 Patch143:	0043-libparted-Fix-probing-AIX-disks-on-other-arches.patch
+
+# (tpg) from debian, dunno it is usefull for anything
+#Patch500:	udevadm-settle.patch
 
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	gpm-devel
