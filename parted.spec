@@ -10,36 +10,64 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	7
+Release:	8
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 Patch0:		parted-3.2-parted-fs-resize-uuid-linkage.patch
-Patch1:		udevadm-settle.patch
-Patch2:		0001-tests-Try-several-UTF8-locales.patch
-Patch3:		0002-maint-post-release-administrivia.patch
-Patch4:		0003-libparted-also-link-to-UUID_LIBS.patch
-Patch5:		0004-lib-fs-resize-Prevent-crash-resizing-FAT16-file-syst.patch
-Patch6:		0005-tests-t3000-resize-fs.sh-Add-FAT16-resizing-test.patch
-Patch7:		0006-tests-t3000-resize-fs.sh-Add-requirement-on-mkfs.vfa.patch
-Patch8:		0007-tests-Change-minimum-size-to-256MiB.patch
-Patch9:		0008-parted-don-t-crash-in-disk_set-when-disk-label-not-f.patch
-Patch10:	0009-tests-Add-a-test-for-device-mapper-partition-sizes.patch
-Patch11:	0010-libparted-device-mapper-uses-512b-sectors.patch
-Patch12:	0011-Update-manpage-NAME-so-whatis-will-work.patch
-Patch13:	0012-tests-Make-sure-the-extended-partition-length-is-cor.patch
-Patch14:	0013-libparted-BLKPG_RESIZE_PARTITION-uses-bytes-not-sect.patch
-Patch15:	0014-parted-Fix-crash-with-name-command-and-no-disklabel-.patch
-Patch16:	0015-UI-Avoid-memory-leaks.patch
-Patch17:	0016-libparted-Fix-memory-leaks.patch
-Patch18:	0017-libparted-Fix-possible-memory-leaks.patch
-Patch19:	0018-libparted-Stop-converting-.-in-sys-path-to.patch
-Patch20:	0019-libparted-Use-read-only-when-probing-devices-on-linu.patch
-Patch21:	0020-tests-Use-wait_for_dev_to_-functions.patch
-Patch22:	0021-fdasd-geometry-handling-updated-from-upstream-s390-t.patch
-Patch24:	0024-fdasd.c-Safeguard-against-geometry-misprobing.patch
 
+
+# (tpg) patches from upstream git
+Patch100:	0000-maint-post-release-administrivia.patch
+Patch101:	0001-libparted-also-link-to-UUID_LIBS.patch
+Patch102:	0002-lib-fs-resize-Prevent-crash-resizing-FAT16-file-syst.patch
+Patch103:	0003-tests-t3000-resize-fs.sh-Add-FAT16-resizing-test.patch
+Patch104:	0004-tests-t3000-resize-fs.sh-Add-requirement-on-mkfs.vfa.patch
+Patch105:	0005-tests-Change-minimum-size-to-256MiB.patch
+Patch106:	0006-parted-don-t-crash-in-disk_set-when-disk-label-not-f.patch
+Patch107:	0007-tests-Add-a-test-for-device-mapper-partition-sizes.patch
+Patch108:	0008-libparted-device-mapper-uses-512b-sectors.patch
+Patch109:	0009-Update-manpage-NAME-so-whatis-will-work.patch
+Patch110:	0010-libparted-arch-linux.c-Compile-without-ENABLE_DEVICE.patch
+Patch111:	0011-libparted-fs-xfs-platform_defs.h-Include-fcntl.h-for.patch
+Patch112:	0012-tests-Fall-back-to-C.UTF-8-if-no-en_US.utf8-availabl.patch
+Patch113:	0013-doc-Fix-url-for-LWN-article.patch
+Patch114:	0014-tests-Make-sure-the-extended-partition-length-is-cor.patch
+Patch115:	0015-libparted-BLKPG_RESIZE_PARTITION-uses-bytes-not-sect.patch
+Patch116:	0016-mac-copy-partition-type-and-name-correctly.patch
+#Patch117:	0017-merge-HACKING-and-README-hacking.patch
+#Patch118:	0018-Fwd-PATCH-2-2-add-verbose-test-documentation.patch
+Patch119:	0019-parted-Fix-crash-with-name-command-and-no-disklabel-.patch
+Patch120:	0020-UI-Avoid-memory-leaks.patch
+Patch121:	0021-libparted-Fix-memory-leaks.patch
+Patch122:	0022-libparted-Fix-possible-memory-leaks.patch
+Patch123:	0023-libparted-Stop-converting-.-in-sys-path-to.patch
+Patch124:	0024-libparted-Fix-misspelling-in-hfs-exception-string.patch
+Patch125:	0025-libparted-Use-read-only-when-probing-devices-on-linu.patch
+Patch126:	0026-tests-Use-wait_for_dev_to_-functions.patch
+Patch127:	0027-fdasd-geometry-handling-updated-from-upstream-s390-t.patch
+Patch128:	0028-dasd-enhance-device-probing.patch
+Patch129:	0029-parted-fix-build-error-on-s390.patch
+Patch130:	0030-fdasd.c-Safeguard-against-geometry-misprobing.patch
+Patch131:	0031-lib-fs-resize-Prevent-crash-resizing-FAT-with-very-d.patch
+Patch132:	0032-tests-t3000-resize-fs.sh-Add-very-deep-directory.patch
+Patch133:	0033-Use-BLKSSZGET-to-get-device-sector-size-in-_device_p.patch
+Patch134:	0034-parted-fix-the-rescue-command.patch
+Patch135:	0035-Use-disk-geometry-as-basis-for-ext2-sector-sizes.patch
+Patch136:	0036-Add-libparted-fs-resize.pc.patch
+Patch137:	0037-docs-Add-list-of-filesystems-for-fs-type-1311596.patch
+Patch138:	0038-parted-Display-details-of-partition-alignment-failur.patch
+Patch139:	0039-lib-fs-resize-Fix-recognition-of-FAT-file-system-aft.patch
+Patch140:	0040-bug-17883-PATCH-configure.ac-uclinux-is-also-linux.patch
+Patch141:	0041-Add-NEWS-entry-for-fat-resize-fix.patch
+Patch142:	0042-libparted-Remove-fdasd-geometry-code-from-alloc_meta.patch
+Patch143:	0043-libparted-Fix-probing-AIX-disks-on-other-arches.patch
+
+# (tpg) from debian, dunno it is usefull for anything
+#Patch500:	udevadm-settle.patch
+
+BuildRequires:	texinfo
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	gpm-devel
 BuildRequires:	readline-devel
@@ -127,4 +155,4 @@ make -C system check || /bin/true
 %{_libdir}/lib%{name}-fs-resize.so
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/*
-%{_libdir}/pkgconfig/lib%{name}.pc
+%{_libdir}/pkgconfig/lib%{name}*.pc

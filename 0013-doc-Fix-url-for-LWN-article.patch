@@ -1,0 +1,26 @@
+From 96c8e0166a8b49b343ecc82836332b0fbe47ea0b Mon Sep 17 00:00:00 2001
+From: "Brian C. Lane" <bcl@redhat.com>
+Date: Wed, 24 Jun 2015 14:54:51 -0700
+Subject: [PATCH 13/43] doc: Fix url for LWN article
+
+Removed an extra http:// from it.
+---
+ doc/parted.texi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/doc/parted.texi b/doc/parted.texi
+index 07aa702..cb12e8d 100644
+--- a/doc/parted.texi
++++ b/doc/parted.texi
+@@ -594,7 +594,7 @@ Cheap flash drives will be with us for a long time to
+ come, and, for them, 1MiB alignment is not enough.
+ Use at least 4MiB-aligned partitions.
+ For details, see Arnd Bergman's article,
+-@uref{http://http://lwn.net/Articles/428584/} and its many comments.}.
++@uref{http://lwn.net/Articles/428584/} and its many comments.}.
+ This command creates a tiny place-holder partition at the beginning, and
+ then uses all remaining space to create the partition you'll actually use:
+ 
+-- 
+1.9.5
+
