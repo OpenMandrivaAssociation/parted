@@ -1,4 +1,5 @@
 %define _disable_ld_no_undefined 1
+%define _disable_lto 1
 
 %define major 2
 %define libname %mklibname %{name} %{major}
@@ -10,7 +11,7 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	8
+Release:	9
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
@@ -63,6 +64,8 @@ Patch140:	0040-bug-17883-PATCH-configure.ac-uclinux-is-also-linux.patch
 Patch141:	0041-Add-NEWS-entry-for-fat-resize-fix.patch
 Patch142:	0042-libparted-Remove-fdasd-geometry-code-from-alloc_meta.patch
 Patch143:	0043-libparted-Fix-probing-AIX-disks-on-other-arches.patch
+Patch144:	0044-libparted-dasd-correct-the-offset-where-the-first-pa.patch
+Patch145:	0045-Add-support-for-NVMe-devices.patch
 
 # (tpg) from debian, dunno it is usefull for anything
 #Patch500:	udevadm-settle.patch
