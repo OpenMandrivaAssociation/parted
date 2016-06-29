@@ -11,13 +11,12 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	9
+Release:	10
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 Patch0:		parted-3.2-parted-fs-resize-uuid-linkage.patch
-
 
 # (tpg) patches from upstream git
 Patch100:	0000-maint-post-release-administrivia.patch
@@ -67,8 +66,11 @@ Patch143:	0043-libparted-Fix-probing-AIX-disks-on-other-arches.patch
 Patch144:	0044-libparted-dasd-correct-the-offset-where-the-first-pa.patch
 Patch145:	0045-Add-support-for-NVMe-devices.patch
 
-# (tpg) from debian, dunno it is usefull for anything
-#Patch500:	udevadm-settle.patch
+# (tpg) patches from SuSE
+Patch501:	parted-2.4-ncursesw6.patch
+Patch502:	libparted-avoid-libdevice-mapper-warnings.patch
+Patch503:	libparted-open-the-device-RO-and-lazily-switch-to-RW.patch
+Patch504:	more-reliable-informing-the-kernel.patch
 
 BuildRequires:	texinfo
 BuildRequires:	gettext-devel >= 0.18
@@ -115,6 +117,9 @@ link software with lib%{name}.
 %apply_patches
 
 %build
+export CFLAGS="%{optflags} `ncursesw6-config --cflags`"
+export LIBS="`ncursesw6-config --libs`"
+
 %configure \
 	--enable-device-mapper \
 	--enable-static \
