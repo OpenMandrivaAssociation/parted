@@ -11,7 +11,7 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	10
+Release:	10.1
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
@@ -117,6 +117,9 @@ link software with lib%{name}.
 %apply_patches
 
 %build
+export CC=gcc
+export CXX=g++
+
 export CFLAGS="%{optflags} `ncursesw6-config --cflags`"
 export LIBS="`ncursesw6-config --libs`"
 
