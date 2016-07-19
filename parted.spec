@@ -1,5 +1,4 @@
 %define _disable_ld_no_undefined 1
-%define _disable_lto 1
 
 %define major 2
 %define libname %mklibname %{name} %{major}
@@ -11,7 +10,7 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	10.1
+Release:	11
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
@@ -117,9 +116,6 @@ link software with lib%{name}.
 %apply_patches
 
 %build
-export CC=gcc
-export CXX=g++
-
 export CFLAGS="%{optflags} `ncursesw6-config --cflags`"
 export LIBS="`ncursesw6-config --libs`"
 
