@@ -10,7 +10,7 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	11
+Release:	12
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
@@ -64,6 +64,36 @@ Patch142:	0042-libparted-Remove-fdasd-geometry-code-from-alloc_meta.patch
 Patch143:	0043-libparted-Fix-probing-AIX-disks-on-other-arches.patch
 Patch144:	0044-libparted-dasd-correct-the-offset-where-the-first-pa.patch
 Patch145:	0045-Add-support-for-NVMe-devices.patch
+Patch146:	0046-docs-Improve-partition-description-in-parted.texi.patch
+Patch147:	0047-libparted-only-IEC-units-are-treated-as-exact.patch
+Patch148:	0048-tests-t3310-flags.sh-Query-libparted-for-all-flags-t.patch
+Patch149:	0049-tests-t3310-flags.sh-Stop-excluding-certain-flags-fr.patch
+Patch150:	0050-tests-t3310-flags.sh-Add-test-for-bsd-table-flags.patch
+Patch151:	0051-libparted-Fix-to-report-success-when-setting-lvm-fla.patch
+Patch152:	0052-libparted-Remove-commented-local-variable-from-bsd_p.patch
+Patch153:	0053-tests-t3310-flags.sh-Add-test-for-mac-table-flags.patch
+Patch154:	0054-tests-t3310-flags.sh-Add-test-for-dvh-table-flags.patch
+Patch155:	0055-tests-t3310-flags.sh-Add-tests-for-remaining-table-t.patch
+Patch156:	0056-tests-t3310-flags.sh-skip-pc98-when-sector-size-512.patch
+Patch157:	0057-tests-Add-udevadm-settle-to-wait_for_-loop-1260664.patch
+Patch158:	0058-tests-Add-wait-to-t9042-1257415.patch
+Patch159:	0059-tests-Fix-t1700-failing-on-a-host-with-a-4k-xfs-file.patch
+Patch160:	0060-doc-Cleanup-mkpart-manpage-entry-1183077.patch
+Patch161:	0061-doc-Add-information-about-quoting.patch
+Patch162:	0062-tests-Set-optimal-blocks-to-64-for-scsi_debug-device.patch
+Patch163:	0063-partprobe-Open-the-device-once-for-probing.patch
+Patch164:	0064-tests-Stop-timing-t9040-1172675.patch
+Patch165:	0065-libparted-Fix-starting-CHS-in-protective-MBR.patch
+Patch166:	0066-libparted-Don-t-warn-if-no-HDIO_GET_IDENTITY-ioctl.patch
+Patch167:	0067-libparted-dasd-unify-vtoc-handling-for-cdl-ldl.patch
+Patch168:	0068-libparted-dasd-update-and-improve-fdasd-functions.patch
+Patch169:	0069-libparted-dasd-add-new-fdasd-functions.patch
+Patch170:	0070-libparted-dasd-add-test-cases-for-the-new-fdasd-func.patch
+Patch171:	0071-libparted-set-swap-flag-on-GPT-partitions.patch
+Patch172:	0072-tests-Update-t0220-and-t0280-for-the-swap-flag.patch
+Patch173:	0073-libparted-tests-Move-get_sector_size-to-common.c.patch
+Patch174:	0074-libparted-Add-support-for-atari-partition-tables.patch
+Patch175:	0075-libparted-Fix-MacOS-boot-support.patch
 
 # (tpg) patches from SuSE
 Patch501:	parted-2.4-ncursesw6.patch
