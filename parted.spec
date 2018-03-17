@@ -104,6 +104,7 @@ Patch504:	more-reliable-informing-the-kernel.patch
 BuildRequires:	texinfo
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	gpm-devel
+BuildRequires:	glibc-devel
 BuildRequires:	readline-devel
 BuildRequires:	pkgconfig(devmapper)
 BuildRequires:	pkgconfig(ext2fs)
@@ -116,21 +117,21 @@ resize, move and copy hard disk partitions. This is useful for
 creating space for new operating systems, reorganising disk
 usage, and copying data to new hard disks.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	The parted library
 Group:		Development/C
 
 %description -n %{libname}
 This package includes the dynamic libraries
 
-%package -n	%{libfsresize}
+%package -n %{libfsresize}
 Summary:	The parted fs-resize library
 Group:		Development/C
 
 %description -n %{libfsresize}
 This package includes the dynamic libraries
 
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Files required to compile software that uses lib%{name}
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
@@ -143,7 +144,7 @@ link software with lib%{name}.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 export CFLAGS="%{optflags} `ncursesw6-config --cflags`"
@@ -159,10 +160,10 @@ export LIBS="`ncursesw6-config --libs`"
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name}
 
