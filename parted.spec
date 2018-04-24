@@ -94,6 +94,25 @@ Patch172:	0072-tests-Update-t0220-and-t0280-for-the-swap-flag.patch
 Patch173:	0073-libparted-tests-Move-get_sector_size-to-common.c.patch
 Patch174:	0074-libparted-Add-support-for-atari-partition-tables.patch
 Patch175:	0075-libparted-Fix-MacOS-boot-support.patch
+Patch176:	0076-libparted-Fix-typo-in-hfs-error-message.patch
+Patch177:	0077-Fix-crash-when-localized.patch
+Patch178:	0078-parted-fix-crash-due-to-improper-partition-number-in.patch
+Patch179:	0079-parted-fix-wrong-error-label-jump-in-mkpart.patch
+Patch180:	0080-clean-the-disk-information-when-commands-fail-in-int.patch
+Patch181:	0081-Add-support-for-RAM-drives.patch
+Patch182:	0082-parted-check-the-name-of-partition-first-when-to-nam.patch
+Patch183:	0083-parted-ui-remove-unneccesary-information-of-command-.patch
+Patch184:	0084-libpartd-dasd-improve-flag-processing-for-DASD-LDL.patch
+Patch185:	0085-libparted-dasd-add-an-exception-for-changing-DASD-LD.patch
+Patch186:	0086-libparted-dasd-add-test-cases-for-the-new-fdasd-func.patch
+Patch187:	0087-Increase-timeout-for-rmmod-scsi_debug-and-make-it-a-.patch
+Patch188:	0088-tests-t1701-rescue-fs-wait-for-the-device-to-appear.patch
+Patch189:	0089-libparted-Fix-udev-cookie-leak-in-_dm_resize_partiti.patch
+Patch190:	0090-libparted-Fix-udev-cookie-leak-in-_dm_resize_partiti.patch
+Patch191:	0091-atari.c-Drop-xlocale.h-1476934.patch
+Patch192:	0092-libparted-labels-link-with-libiconv-if-needed.patch
+Patch193:	0093-Add-support-for-NVDIMM-devices.patch
+Patch194:	0094-linux-Include-sys-sysmacros.h-for-major-macro.patch
 
 # (tpg) patches from SuSE
 Patch501:	parted-2.4-ncursesw6.patch
@@ -147,7 +166,7 @@ link software with lib%{name}.
 %autopatch -p1
 
 %build
-export CFLAGS="%{optflags} `ncursesw6-config --cflags`"
+export CFLAGS="%{optflags} $(ncursesw6-config --cflags)"
 export LIBS="`ncursesw6-config --libs`"
 
 %configure \

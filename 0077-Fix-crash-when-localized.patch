@@ -1,0 +1,41 @@
+From b81a1115c4e5855bbed8a34fcf27bcdd50456374 Mon Sep 17 00:00:00 2001
+From: Phillip Susi <psusi@ubuntu.com>
+Date: Tue, 31 Jan 2017 13:51:46 -0500
+Subject: [PATCH 77/94] Fix crash when localized
+
+The _() macro is only for translating string literals.  It was
+incorrectly applied to a runtime string representing the name
+of a partition and this sometimes caused a gettext crash.
+---
+ NEWS            | 1 +
+ parted/parted.c | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/NEWS b/NEWS
+index 198b35d..5a8db48 100644
+--- a/NEWS
++++ b/NEWS
+@@ -5,6 +5,7 @@ GNU parted NEWS                                    -*- outline -*-
+ * Noteworthy changes in release ?.? (????-??-??) [?]
+ 
+ ** Bug Fixes
++  Fix a gettext crash/error sometimes when using localized languages.
+ 
+   Fix fat resize to preverve boot code, and thus not render the
+   filesystem unreconized by Windows.
+diff --git a/parted/parted.c b/parted/parted.c
+index 7e6c266..a72a4eb 100644
+--- a/parted/parted.c
++++ b/parted/parted.c
+@@ -1276,7 +1276,7 @@ do_print (PedDevice** dev, PedDisk** diskp)
+                         putchar (':');
+ 
+                     if (has_name)
+-                        printf ("%s:", _(ped_partition_get_name (part)));
++                        printf ("%s:", ped_partition_get_name (part));
+                     else
+                         putchar (':');
+ 
+-- 
+2.8.3
+
