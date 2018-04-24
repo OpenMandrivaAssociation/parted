@@ -125,10 +125,13 @@ BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	gpm-devel
 BuildRequires:	glibc-devel
 BuildRequires:	readline-devel
+BuildRequires:	hostname
+BuildRequires:	gperf
 BuildRequires:	pkgconfig(devmapper)
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(uuid)
+BuildRequires:	pkgconfig(blkid)
 
 %description
 GNU Parted is a program that allows you to create, destroy,
