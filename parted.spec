@@ -10,7 +10,7 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	13
+Release:	14
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
@@ -127,7 +127,7 @@ BuildRequires:	glibc-devel
 BuildRequires:	readline-devel
 BuildRequires:	hostname
 BuildRequires:	gperf
-BuildRequires:	pkgconfig(devmapper)
+BuildRequires:	pkgconfig(devmapper) >= 1.02.153
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(uuid)
