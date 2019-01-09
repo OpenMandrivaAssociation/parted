@@ -10,7 +10,7 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	14
+Release:	15
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
