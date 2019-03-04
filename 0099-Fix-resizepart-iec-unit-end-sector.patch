@@ -1,0 +1,48 @@
+From 247e3fc6cd8bca79b7c0362886ae9b5b06ba6f8c Mon Sep 17 00:00:00 2001
+From: Phillip Susi <psusi@ubuntu.com>
+Date: Thu, 12 May 2016 21:38:51 -0400
+Subject: [PATCH 099/118] Fix resizepart iec unit end sector
+
+Fix resizepart to adjust the end to be -1 sector when using iec
+power of 2 units so that the next partition can start immediately
+following the new end, just like mkpart does.
+---
+ NEWS            | 4 ++++
+ parted/parted.c | 5 ++++-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/NEWS b/NEWS
+index 9236b6d..83352a6 100644
+--- a/NEWS
++++ b/NEWS
+@@ -6,6 +6,10 @@ GNU parted NEWS                                    -*- outline -*-
+ 
+ ** Bug Fixes
+ 
++  Fix resizepart to adjust the end to be -1 sector when using iec
++  power of 2 units so that the next partition can start immediately
++  following the new end, just like mkpart does.
++
+   Fix set and disk_set to not crash when there are no flags to set.
+ 
+   Fix a udev cookie leak when using resizepart on device-mapper devices.
+diff --git a/parted/parted.c b/parted/parted.c
+index 88f32b9..267c346 100644
+--- a/parted/parted.c
++++ b/parted/parted.c
+@@ -1567,8 +1567,11 @@ do_resizepart (PedDevice** dev, PedDisk** diskp)
+ 
+         start = part->geom.start;
+         end = oldend = part->geom.end;
+-        if (!command_line_get_sector (_("End?"), *dev, &end, &range_end, NULL))
++        char *end_input;
++        if (!command_line_get_sector (_("End?"), *dev, &end, &range_end, &end_input))
+                 goto error;
++        _adjust_end_if_iec(&start, &end, range_end, end_input);
++        free(end_input);
+         /* Do not move start of the partition */
+         constraint = constraint_from_start_end_fixed_start (*dev, start, range_end);
+         if (!ped_disk_set_partition_geom (disk, part, constraint,
+-- 
+2.20.1
+

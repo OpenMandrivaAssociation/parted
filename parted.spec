@@ -10,7 +10,7 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.2
-Release:	15
+Release:	16
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
@@ -113,6 +113,30 @@ Patch191:	0091-atari.c-Drop-xlocale.h-1476934.patch
 Patch192:	0092-libparted-labels-link-with-libiconv-if-needed.patch
 Patch193:	0093-Add-support-for-NVDIMM-devices.patch
 Patch194:	0094-linux-Include-sys-sysmacros.h-for-major-macro.patch
+Patch195:	0095-Fix-make-check.patch
+Patch196:	0096-tests-fix-t6100-mdraid-partitions.patch
+Patch197:	0097-Fix-set-and-disk_set-to-not-crash-when-no-flags-are-.patch
+Patch198:	0098-mkpart-Allow-negative-start-value-when-FS-TYPE-is-no.patch
+Patch199:	0099-Fix-resizepart-iec-unit-end-sector.patch
+Patch200:	0100-build-Remove-unused-traces-of-dynamic-loading.patch
+Patch201:	0101-Lift-512-byte-restriction-on-fat-resize.patch
+Patch202:	0102-Fix-atari-label-false-positives.patch
+Patch203:	0103-libparted-Fix-ending-CHS-address-in-PMBR.patch
+Patch204:	0104-Modify-gpt-header-move-and-msdos-overlap-to-work-wit.patch
+Patch205:	0105-Fix-the-length-of-several-strncpy-calls.patch
+Patch206:	0106-parted.c-Always-free-peek_word.patch
+Patch207:	0107-parted.c-Make-sure-dev_name-is-freed.patch
+Patch208:	0108-t6100-mdraid-partitions-Use-v0.90-metadata-for-the-t.patch
+Patch209:	0109-Fix-potential-command-line-buffer-overflow.patch
+Patch210:	0110-libparted-Add-support-for-MBR-id-GPT-GUID-and-detect.patch
+Patch211:	0111-Add-udf-to-t1700-probe-fs-and-to-the-manpage.patch
+Patch212:	0112-ped_unit_get_name-Resolve-conflicting-attributes-con.patch
+Patch213:	0113-Fix-warnings-from-GCC-7-s-Wimplicit-fallthrough.patch
+Patch214:	0114-Read-NVMe-model-names-from-sysfs.patch
+Patch215:	0115-docs-Update-GNU-License-version-in-parted-.text-file.patch
+Patch216:	0116-parted-Remove-PED_ASSERT-from-ped_partition_set_name.patch
+Patch217:	0117-Added-support-for-Windows-recovery-partition-WINRE-o.patch
+Patch218:	0118-Fix-align-check-help-output.patch
 
 # (tpg) patches from SuSE
 Patch501:	parted-2.4-ncursesw6.patch
@@ -170,7 +194,7 @@ link software with lib%{name}.
 
 %build
 export CFLAGS="%{optflags} $(ncursesw6-config --cflags)"
-export LIBS="`ncursesw6-config --libs`"
+export LIBS="$(ncursesw6-config --libs)"
 
 %configure \
 	--enable-device-mapper \
