@@ -16,13 +16,13 @@ Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 Patch0:		parted-3.2-parted-fs-resize-uuid-linkage.patch
+Patch1:		parted-3.3-check-for-__builtin_mul_overflow_p.patch
 
 # (tpg) patches from SuSE
 Patch501:	parted-2.4-ncursesw6.patch
 Patch502:	libparted-avoid-libdevice-mapper-warnings.patch
 Patch503:	libparted-open-the-device-RO-and-lazily-switch-to-RW.patch
 Patch504:	more-reliable-informing-the-kernel.patch
-
 BuildRequires:	texinfo
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	glibc-devel
@@ -68,8 +68,7 @@ This package includes the header files and libraries needed to
 link software with lib%{name}.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 %build
 export CFLAGS="%{optflags} $(ncursesw6-config --cflags)"
