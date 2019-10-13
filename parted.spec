@@ -29,7 +29,7 @@ BuildRequires:	glibc-devel
 BuildRequires:	pkgconfig(readline)
 BuildRequires:	hostname
 BuildRequires:	gperf
-BuildRequires:	kernel-release-source
+BuildRequires:	kernel-release-devel
 BuildRequires:	pkgconfig(devmapper) >= 1.02.153
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(ncursesw)
