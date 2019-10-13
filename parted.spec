@@ -1,4 +1,10 @@
 %define _disable_ld_no_undefined 1
+# (tpg) 2019-10-13
+# BUILDSTDERR: ld: error: undefined symbol: ped_device_open
+# BUILDSTDERR: >>> referenced by filesys.c:145 (r/filesys.c:145)
+# BUILDSTDERR: >>>               lto.tmp:(ped_file_system_open)
+# BUILDSTDERR: >>> referenced by filesys.c:225 (r/filesys.c:225)
+%define _disable_lto 1
 
 %define major 2
 %define libname %mklibname %{name} %{major}
