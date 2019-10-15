@@ -1,10 +1,4 @@
-%define _disable_ld_no_undefined 1
-# (tpg) 2019-10-13
-# BUILDSTDERR: ld: error: undefined symbol: ped_device_open
-# BUILDSTDERR: >>> referenced by filesys.c:145 (r/filesys.c:145)
-# BUILDSTDERR: >>>               lto.tmp:(ped_file_system_open)
-# BUILDSTDERR: >>> referenced by filesys.c:225 (r/filesys.c:225)
-%define _disable_lto 1
+%global optflags %{optflags} --rtlib=compiler-rt
 
 %define major 2
 %define libname %mklibname %{name} %{major}
@@ -29,13 +23,19 @@ Patch501:	parted-2.4-ncursesw6.patch
 Patch502:	libparted-avoid-libdevice-mapper-warnings.patch
 Patch503:	libparted-open-the-device-RO-and-lazily-switch-to-RW.patch
 Patch504:	more-reliable-informing-the-kernel.patch
+
 BuildRequires:	texinfo
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	glibc-devel
 BuildRequires:	pkgconfig(readline)
 BuildRequires:	hostname
 BuildRequires:	gperf
-BuildRequires:	kernel-release-devel
+# (tpg) well we should use kernel's ext2_fs.h
+# but somehow it can not be found, event with hacks
+# it does not compile
+# checking /usr/src/linux-5.3.6-desktop-1omv4001/include/linux/ext2_fs.h usability... no
+# checking /usr/src/linux-5.3.6-desktop-1omv4001/include/linux/ext2_fs.h presence... yes
+#BuildRequires:	kernel-release-devel
 BuildRequires:	pkgconfig(devmapper) >= 1.02.153
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(ncursesw)
@@ -77,9 +77,6 @@ link software with lib%{name}.
 %autosetup -p1
 
 %build
-export CFLAGS="%{optflags} $(ncursesw6-config --cflags)"
-export LIBS="$(ncursesw6-config --libs)"
-
 %configure \
 	--without-included-regex \
 	--enable-device-mapper \
@@ -89,8 +86,6 @@ export LIBS="$(ncursesw6-config --libs)"
 	--with-packager="%{vendor}" \
 	--with-packager-bug-reports="%{bugurl}" \
 	--with-pic
-
-cat config.log
 
 # Don't use rpath!
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
