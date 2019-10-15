@@ -15,8 +15,9 @@ License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
-Patch0:		parted-3.2-parted-fs-resize-uuid-linkage.patch
-Patch1:		parted-3.3-check-for-__builtin_mul_overflow_p.patch
+Patch0:		parted-3.3-check-for-__builtin_mul_overflow_p.patch
+Patch1:		parted-3.2.153-link-new.patch
+Patch2:		parted-3.3-fix-path-to-misc-h.patch
 
 # (tpg) patches from SuSE
 Patch501:	parted-2.4-ncursesw6.patch
@@ -74,9 +75,14 @@ This package includes the header files and libraries needed to
 link software with lib%{name}.
 
 %prep
-%autosetup -p1
+%setup -q
+
+mv libparted/fs/r libparted/fsresize
+mv libparted/fs/fsresize.sym libparted/fsresize/
+%autopatch -p1
 
 %build
+autoreconf -fiv
 %configure \
 	--without-included-regex \
 	--enable-device-mapper \
