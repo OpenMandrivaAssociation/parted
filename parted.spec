@@ -1,4 +1,6 @@
+%ifnarch riscv64
 %global optflags %{optflags} --rtlib=compiler-rt
+%endif
 
 %define major 2
 %define libname %mklibname %{name} %{major}
