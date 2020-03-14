@@ -12,7 +12,7 @@
 Summary:	Flexible partitioning tool
 Name:		parted
 Version:	3.3
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
@@ -26,6 +26,14 @@ Patch501:	parted-2.4-ncursesw6.patch
 Patch502:	libparted-avoid-libdevice-mapper-warnings.patch
 Patch503:	libparted-open-the-device-RO-and-lazily-switch-to-RW.patch
 Patch504:	more-reliable-informing-the-kernel.patch
+
+# Upstream patches since v3.3 release
+Patch1001:	0001-Switch-gpt-header-move-and-msdos-overlap-to-python3.patch
+Patch1002:	0003-tests-Test-incomplete-resizepart-command.patch
+Patch1003:	0004-Fix-end_input-usage-in-do_resizepart.patch
+Patch1004:	0005-libparted-Add-ChromeOS-Kernel-partition-flag.patch
+Patch1005:	0006-libparted-Add-support-for-MSDOS-partition-type-bls_b.patch
+Patch1006:	0007-libparted-Add-support-for-bls_boot-to-GPT-disks.patch
 
 BuildRequires:	texinfo
 BuildRequires:	gettext-devel >= 0.18
