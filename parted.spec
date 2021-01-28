@@ -9,7 +9,7 @@
 
 Summary:	Flexible partitioning tool
 Name:		parted
-Version:	3.3.52
+Version:	3.4
 Release:	1
 License:	GPLv3+
 Group:		System/Configuration/Hardware
