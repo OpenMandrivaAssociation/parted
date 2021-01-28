@@ -1,0 +1,22 @@
+diff -Naur parted-3.4/libparted/fs/Makefile.am parted-3.4.tpg/libparted/fs/Makefile.am
+--- parted-3.4/libparted/fs/Makefile.am	2021-01-25 19:49:56.000000000 +0000
++++ parted-3.4.tpg/libparted/fs/Makefile.am	2021-01-28 13:41:45.923000000 +0000
+@@ -74,6 +74,7 @@
+   -version-info $(CURRENT):$(REVISION):$(AGE)
+ EXTRA_DIST += fsresize.sym
+ libparted_fs_resize_la_DEPENDENCIES = $(sym_file)
++libparted_fs_resize_la_LIBADD = $(top_builddir)/libparted/libparted.la
+ 
+ libparted_fs_resize_la_SOURCES = \
+   r/filesys.c			\
+diff -Naur parted-3.4/libparted/fs/Makefile.in parted-3.4.tpg/libparted/fs/Makefile.in
+--- parted-3.4/libparted/fs/Makefile.in	2021-01-27 23:29:02.000000000 +0000
++++ parted-3.4.tpg/libparted/fs/Makefile.in	2021-01-28 13:42:14.833000000 +0000
+@@ -1577,6 +1577,7 @@
+   -version-info $(CURRENT):$(REVISION):$(AGE)
+ 
+ libparted_fs_resize_la_DEPENDENCIES = $(sym_file)
++libparted_fs_resize_la_LIBADD = $(top_builddir)/libparted/libparted.la
+ libparted_fs_resize_la_SOURCES = \
+   r/filesys.c			\
+   r/fat/bootsector.c		\

@@ -15,7 +15,7 @@ License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
-
+Patch0:		parted-3.4-fix-linking.patch
 # (tpg) patches from SuSE
 Patch502:	libparted-avoid-libdevice-mapper-warnings.patch
 Patch503:	libparted-open-the-device-RO-and-lazily-switch-to-RW.patch
