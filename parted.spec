@@ -1,6 +1,7 @@
-%ifnarch riscv64
-%global optflags %{optflags} --rtlib=compiler-rt
-%endif
+# (tpg) libparted links to libparted-fs-resize and vice-versa
+%define _disable_ld_no_undefined 1
+
+%global optflags %{optflags} -Oz
 
 %define major 2
 %define libname %mklibname %{name} %{major}
@@ -11,15 +12,12 @@
 
 Summary:	Flexible partitioning tool
 Name:		parted
-Version:	3.3
-Release:	2
+Version:	3.4
+Release:	1
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
-Patch0:		parted-3.3-check-for-__builtin_mul_overflow_p.patch
-Patch1:		parted-3.2.153-link-new.patch
-Patch2:		parted-3.3-fix-path-to-misc-h.patch
 
 # (tpg) patches from SuSE
 Patch501:	parted-2.4-ncursesw6.patch
@@ -27,31 +25,16 @@ Patch502:	libparted-avoid-libdevice-mapper-warnings.patch
 Patch503:	libparted-open-the-device-RO-and-lazily-switch-to-RW.patch
 Patch504:	more-reliable-informing-the-kernel.patch
 
-# Upstream patches since v3.3 release
-Patch1001:	0001-Switch-gpt-header-move-and-msdos-overlap-to-python3.patch
-Patch1002:	0003-tests-Test-incomplete-resizepart-command.patch
-Patch1003:	0004-Fix-end_input-usage-in-do_resizepart.patch
-Patch1004:	0005-libparted-Add-ChromeOS-Kernel-partition-flag.patch
-Patch1005:	0006-libparted-Add-support-for-MSDOS-partition-type-bls_b.patch
-Patch1006:	0007-libparted-Add-support-for-bls_boot-to-GPT-disks.patch
-
-BuildRequires:	texinfo
 BuildRequires:	gettext-devel >= 0.18
-BuildRequires:	glibc-devel
 BuildRequires:	pkgconfig(readline)
 BuildRequires:	hostname
 BuildRequires:	gperf
-# (tpg) well we should use kernel's ext2_fs.h
-# but somehow it can not be found, event with hacks
-# it does not compile
-# checking /usr/src/linux-5.3.6-desktop-1omv4001/include/linux/ext2_fs.h usability... no
-# checking /usr/src/linux-5.3.6-desktop-1omv4001/include/linux/ext2_fs.h presence... yes
-#BuildRequires:	kernel-release-devel
 BuildRequires:	pkgconfig(devmapper) >= 1.02.153
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(blkid)
+Requires:	e2fsprogs
 
 %description
 GNU Parted is a program that allows you to create, destroy,
@@ -85,11 +68,7 @@ This package includes the header files and libraries needed to
 link software with lib%{name}.
 
 %prep
-%setup -q
-
-mv libparted/fs/r libparted/fsresize
-mv libparted/fs/fsresize.sym libparted/fsresize/
-%autopatch -p1
+%autosetup -p1
 
 %build
 autoreconf -fiv
@@ -97,9 +76,11 @@ autoreconf -fiv
 	--without-included-regex \
 	--enable-device-mapper \
 	--enable-static \
+	--enable-debug \
 	--with-readline \
 	--enable-threads=posix \
 	--with-packager="%{vendor}" \
+	--with-packager-version="%{distro_release}" \
 	--with-packager-bug-reports="%{bugurl}" \
 	--with-pic
 
