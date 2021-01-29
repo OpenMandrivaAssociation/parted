@@ -1,3 +1,6 @@
+# (tpg) libparted links to libparted-fs-resize and vice-versa
+%define _disable_ld_no_undefined 1
+
 %global optflags %{optflags} -Oz
 
 %define major 2
@@ -15,15 +18,14 @@ License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		http://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
-Patch0:		parted-3.4-fix-linking.patch
+
 # (tpg) patches from SuSE
+Patch501:	parted-2.4-ncursesw6.patch
 Patch502:	libparted-avoid-libdevice-mapper-warnings.patch
 Patch503:	libparted-open-the-device-RO-and-lazily-switch-to-RW.patch
 Patch504:	more-reliable-informing-the-kernel.patch
 
-BuildRequires:	texinfo
 BuildRequires:	gettext-devel >= 0.18
-BuildRequires:	glibc-devel
 BuildRequires:	pkgconfig(readline)
 BuildRequires:	hostname
 BuildRequires:	gperf
@@ -78,6 +80,7 @@ autoreconf -fiv
 	--with-readline \
 	--enable-threads=posix \
 	--with-packager="%{vendor}" \
+	--with-packager-version="%{distro_release}" \
 	--with-packager-bug-reports="%{bugurl}" \
 	--with-pic
 
