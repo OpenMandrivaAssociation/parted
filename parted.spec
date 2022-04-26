@@ -12,7 +12,7 @@
 
 Summary:	Flexible partitioning tool
 Name:		parted
-Version:	3.4
+Version:	3.5
 Release:	1
 License:	GPLv3+
 Group:		System/Configuration/Hardware
@@ -103,9 +103,9 @@ make -C system check || /bin/true
 %doc README
 %{_sbindir}/parted
 %{_sbindir}/partprobe
-%{_mandir}/man8/parted.8*
-%{_mandir}/man8/partprobe.8*
-%{_infodir}/parted.info*
+%doc %{_mandir}/man8/parted.8*
+%doc %{_mandir}/man8/partprobe.8*
+%doc %{_infodir}/parted.info*
 
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.%{major}*
