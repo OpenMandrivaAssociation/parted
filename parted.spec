@@ -24,6 +24,7 @@ Patch501:	parted-2.4-ncursesw6.patch
 Patch502:	libparted-avoid-libdevice-mapper-warnings.patch
 Patch503:	libparted-open-the-device-RO-and-lazily-switch-to-RW.patch
 Patch504:	more-reliable-informing-the-kernel.patch
+Patch999:	parted-3.5-fix-clang.patch
 
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	pkgconfig(readline)
