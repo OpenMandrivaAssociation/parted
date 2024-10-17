@@ -16,7 +16,7 @@ Version:	3.6
 Release:	2
 License:	GPLv3+
 Group:		System/Configuration/Hardware
-Url:		http://www.gnu.org/software/parted/
+Url:		https://www.gnu.org/software/parted/
 Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 
 # (tpg) patches from SuSE
