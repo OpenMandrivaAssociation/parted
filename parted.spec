@@ -26,6 +26,11 @@ Patch503:	libparted-open-the-device-RO-and-lazily-switch-to-RW.patch
 Patch504:	more-reliable-informing-the-kernel.patch
 Patch999:	parted-3.5-fix-clang.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	pkgconfig(readline)
 BuildRequires:	hostname
