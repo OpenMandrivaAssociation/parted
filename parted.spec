@@ -12,12 +12,12 @@
 
 Summary:	Flexible partitioning tool
 Name:		parted
-Version:	3.6
-Release:	2
+Version:	3.7
+Release:	1
 License:	GPLv3+
 Group:		System/Configuration/Hardware
 Url:		https://www.gnu.org/software/parted/
-Source0:	http://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
+Source0:	https://ftp.gnu.org/gnu/parted/%{name}-%{version}.tar.xz
 
 # (tpg) patches from SuSE
 Patch501:	parted-2.4-ncursesw6.patch
