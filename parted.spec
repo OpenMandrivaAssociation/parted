@@ -77,6 +77,11 @@ link software with lib%{name}.
 %autosetup -p1
 
 %build
+# try libtool
+ln -sf %{_bindir}/libtoolize slibtoolize
+export PATH=$PWD:$PATH
+export LIBTOOLIZE=%{_bindir}/libtoolize
+export LIBTOOL=%{_bindir}/libtool
 autoreconf -fiv
 %configure \
 	--without-included-regex \
