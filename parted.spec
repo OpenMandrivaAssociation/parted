@@ -82,7 +82,7 @@ ln -sf %{_bindir}/libtoolize slibtoolize
 export PATH=$PWD:$PATH
 export LIBTOOLIZE=%{_bindir}/libtoolize
 export LIBTOOL=%{_bindir}/libtool
-autoreconf -fiv
+#autoreconf -fiv
 %configure \
 	--without-included-regex \
 	--enable-device-mapper \
