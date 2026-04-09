@@ -82,7 +82,7 @@ ln -sf %{_bindir}/libtoolize slibtoolize
 export PATH=$PWD:$PATH
 export LIBTOOLIZE=%{_bindir}/libtoolize
 export LIBTOOL=%{_bindir}/libtool
-autoreconf -fiv
+#autoreconf -fiv
 %configure \
 	--without-included-regex \
 	--enable-device-mapper \
@@ -155,7 +155,7 @@ make -C system check || /bin/true
 %{_libdir}/lib%{name}-fs-resize.so.%{fsresize_major}*
 
 %files -n %{devname}
-%doc AUTHORS ChangeLog doc/API TODO
+%doc AUTHORS ChangeLog TODO
 %{_libdir}/lib%{name}.a
 %{_libdir}/lib%{name}.so
 %{_libdir}/lib%{name}-fs-resize.a
