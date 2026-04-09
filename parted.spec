@@ -29,7 +29,7 @@ Patch504:	more-reliable-informing-the-kernel.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
-BuildRequires:	slibtool
+BuildRequires:	libtool
 BuildRequires:	make
 BuildRequires:	gettext-devel >= 0.18
 BuildRequires:	pkgconfig(readline)
